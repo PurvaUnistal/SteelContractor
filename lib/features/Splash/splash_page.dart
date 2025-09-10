@@ -107,8 +107,10 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
               child: Image.asset(
                 AppConfig.instanceInit()!.client == Client.agcl
                     ? AppIcon.agclLogo
-                    : AppConfig.instanceInit()!.client == Client.purvaBharti
+                    : AppConfig.instanceInit()!.client == Client.purbaBharati
                     ? AppIcon.pbgLogo
+                    : AppConfig.instanceInit()!.client == Client.mahaNagar
+                    ? AppIcon.mglLogo
                     : AppIcon.pbgLogo,
                 height: MediaQuery.of(context).size.height * 0.3,
                 width: MediaQuery.of(context).size.width * 0.6,

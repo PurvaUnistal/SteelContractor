@@ -177,6 +177,9 @@ class HydroTestBloc extends Bloc<HydroTestEvent, HydroTestState> {
         if (await canLaunchUrl(uri)) {
           await launchUrl(uri, mode: LaunchMode.externalApplication);
         } else {
+          ScaffoldMessenger.of(event.context).showSnackBar(
+            const SnackBar(content: Text("File not found on server (404)")),
+          );
           throw 'Could not launch ${event.url}';
         }
       }
@@ -191,6 +194,9 @@ class HydroTestBloc extends Bloc<HydroTestEvent, HydroTestState> {
         if (await canLaunchUrl(uri)) {
           await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
         } else {
+          ScaffoldMessenger.of(event.context).showSnackBar(
+            const SnackBar(content: Text("File not found on server (404)")),
+          );
           throw 'Could not launch ${event.url}';
         }
       }

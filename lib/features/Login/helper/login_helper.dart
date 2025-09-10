@@ -64,7 +64,12 @@ class LoginHelper {
         context: context,
       );
       if (res != null && res["error"] == false) {
-        if (res["user"]["role"] == "contractor" || res["user"]["role"] =="pmc"|| res["user"]["role"] == "client") {
+        if (
+        res["user"]["role"] == "contractor"
+            || res["user"]["role"] =="pmc"
+            || res["user"]["role"] == "client"
+            || res["user"]["role"] == "engineer"
+        ) {
           await Utils.successSnackBar(msg: res["messages"], context: context);
           String baseUrl = Apis.loginUrl.replaceAll("api/auth", "");
           AppConfig.instanceInit()?.setBaseURL(baseURL: baseUrl);

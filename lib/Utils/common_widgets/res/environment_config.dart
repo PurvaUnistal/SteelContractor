@@ -26,28 +26,34 @@ class EnvironmentConfig extends InheritedWidget {
         return "http://pbgpldev.smartgasnet.com/api/";
       case EnvironmentFlavor.prodIGL:
         return "https://igl.smartgasnet.com/api/";
+      case EnvironmentFlavor.prodMGL:
+        return "https://mgl.smartgasnet.com/api/";
     }
   }
 
-  Color get primaryTheme {
-    switch (flavor) {
-      case EnvironmentFlavor.prodAGCL:
-        return Colors.blue.shade800;
-      case EnvironmentFlavor.prodPBGPL:
-        return Colors.green.shade800;
-      case EnvironmentFlavor.prodIGL:
-        return Colors.yellow.shade800;
+    Color get primaryTheme {
+      switch (flavor) {
+        case EnvironmentFlavor.prodAGCL:
+          return Colors.blue.shade800;
+        case EnvironmentFlavor.prodPBGPL:
+          return Colors.green.shade800;
+        case EnvironmentFlavor.prodIGL:
+          return Colors.yellow.shade800;
+        case EnvironmentFlavor.prodMGL:
+          return Colors.green.shade800;
+      }
     }
-  }
-
-  Color get secondaryTheme {
-    switch (flavor) {
-      case EnvironmentFlavor.prodAGCL:
-        return Colors.blue.shade800;
-      case EnvironmentFlavor.prodPBGPL:
-        return Colors.yellow.shade800;
-      case EnvironmentFlavor.prodIGL:
-        return Colors.green.shade800;
+  
+    Color get secondaryTheme {
+      switch (flavor) {
+        case EnvironmentFlavor.prodAGCL:
+          return Colors.blue.shade800;
+        case EnvironmentFlavor.prodPBGPL:
+          return Colors.yellow.shade800;
+        case EnvironmentFlavor.prodIGL:
+          return Colors.green.shade800;
+        case EnvironmentFlavor.prodMGL:
+          return Colors.yellow.shade800;
+      }
     }
-  }
 }

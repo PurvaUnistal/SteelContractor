@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
 import 'package:steel_contractor/features/ClearingGrading/domain/model/ReportActivityModel.dart';
 import 'package:steel_contractor/features/ClearingGrading/helper/clearing_grading_helper.dart';
@@ -177,6 +178,9 @@ class RouteSurveyBloc extends Bloc<RouteSurveyEvent, RouteSurveyState> {
         if (await canLaunchUrl(uri)) {
           await launchUrl(uri, mode: LaunchMode.externalApplication);
         } else {
+          ScaffoldMessenger.of(event.context).showSnackBar(
+            const SnackBar(content: Text("File not found on server (404)")),
+          );
           throw 'Could not launch ${event.url}';
         }
       }
@@ -191,6 +195,9 @@ class RouteSurveyBloc extends Bloc<RouteSurveyEvent, RouteSurveyState> {
         if (await canLaunchUrl(uri)) {
           await launchUrl(uri, mode: LaunchMode.externalApplication);
         } else {
+          ScaffoldMessenger.of(event.context).showSnackBar(
+            const SnackBar(content: Text("File not found on server (404)")),
+          );
           throw 'Could not launch ${event.url}';
         }
       }

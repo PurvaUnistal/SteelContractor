@@ -79,7 +79,9 @@ class _LoginPageState extends State<LoginPage> {
                     _logoWidget(),
                     CommonStyle.vertical(context: context),
                     Text(
-                      'Purba Bharati Gas Pvt. Ltd',
+                      AppConfig.instanceInit()!.client == Client.purbaBharati
+                     ? 'Purba Bharati Gas Pvt. Ltd'
+                     : 'Mahanagar Gas Pvt',
                       style: TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
@@ -174,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Image.asset(
-        AppConfig.instanceInit()!.client == Client.purvaBharti
+        AppConfig.instanceInit()!.client == Client.purbaBharati
             ? AppIcon.pbgLogo
             :AppConfig.instanceInit()!.client == Client.mahaNagar
             ? AppIcon.mglLogo

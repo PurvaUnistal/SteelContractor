@@ -26,9 +26,16 @@ android {
         create("prodPBGPL") {
             dimension = "version"
             applicationIdSuffix = ".pbgpl.steel.contractor"
-            resValue("string", "app_name", "Steel Contractor")
+            resValue("string", "app_name", "MGL Steel Contractor")
             manifestPlaceholders.put("appIcon", "@mipmap/pbgpl_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/pbgpl_logo")
+        }
+        create("prodMGL") {
+            dimension = "version"
+            applicationIdSuffix = ".mgl.steel.contractor"
+            resValue("string", "app_name", "MGl Contractor")
+            manifestPlaceholders.put("appIcon", "@mipmap/mgl_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/mgl_logo")
         }
     }
 
@@ -39,7 +46,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
-        targetSdk = flutter.targetSdkVersion
+        targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }

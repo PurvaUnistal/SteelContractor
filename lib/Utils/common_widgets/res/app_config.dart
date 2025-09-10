@@ -62,10 +62,10 @@ class AppConfig {
   }
 
 
-  void setBuildNumber({required String buildNumber}) {
-    _buildNumber = buildNumber;
-    print("buildNumber : $_buildNumber");
-  }
+    void setBuildNumber({required String buildNumber}) {
+      _buildNumber = buildNumber;
+      print("buildNumber : $_buildNumber");
+    }
 
   void setPackageName({required String packageName}) {
     _packageName = packageName;

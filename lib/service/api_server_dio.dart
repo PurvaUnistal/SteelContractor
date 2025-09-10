@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mime/mime.dart';
 import 'package:steel_contractor/Utils/common_widgets/connectivity_helper.dart';
+import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
 
 import '../Utils/Utils.dart';
 import 'Apis.dart';
@@ -17,9 +18,13 @@ class ApiHelper {
       if (!await ConnectivityHelper.allConnectivityCheck(context: context)) {
         return null;
       }
+      String token = AppConfig.instanceInit()?.loginData.token ?? "";
       String url = Apis.baseUrl + urlEndPoint;
       log("URL --> $url");
-      final response = await Dio().get(Uri.parse(url).toString());
+      final response = await Dio().get(
+        Uri.parse(url).toString(),
+        options: Options(headers: {"Authorization": token}),
+      );
       log("URL --> $url");
       log("Response Data --> ${response.data}");
       if (response.statusCode == 200) {
@@ -31,7 +36,11 @@ class ApiHelper {
       debugPrint("Dio Error --> ${error.message}");
       final statusCode = error.response?.statusCode;
       Response? errorMessage = error.response;
-      return await _handleError(statusCode :statusCode, errorMessage: errorMessage,context: context);
+      return await _handleError(
+        statusCode: statusCode,
+        errorMessage: errorMessage,
+        context: context,
+      );
     } catch (e) {
       log("Catch Error --> $e");
       await Utils.errorSnackBar(msg: "Something Went Wrong", context: context);
@@ -43,7 +52,6 @@ class ApiHelper {
     required BuildContext context,
     required String urlEndPoint,
     Map<String, dynamic>? param,
-    Map<String, String>? headers,
     String? contentType,
     formData,
   }) async {
@@ -51,14 +59,18 @@ class ApiHelper {
       if (!await ConnectivityHelper.allConnectivityCheck(context: context)) {
         return null;
       }
+      String token = AppConfig.instanceInit()?.loginData.token ?? "";
       String url = Apis.baseUrl + urlEndPoint;
-      var options = Options(
-        headers: headers ?? {},
-        contentType:
-            contentType ?? (formData != null ? "multipart/form-data" : null),
+
+      var res = await Dio().post(
+        Uri.parse(url).toString(),
+        options: Options(
+          headers: {"Authorization": token},
+          contentType:
+              contentType ?? (formData != null ? "multipart/form-data" : null),
+        ),
+        data: param ?? FormData.fromMap(formData),
       );
-      var res = await Dio().post(Uri.parse(url).toString(),
-          options: options, data: param ?? FormData.fromMap(formData));
       log("URL :- ${url}");
       log("RES Data :- ${res.data}");
       if (res.statusCode == 200) {
@@ -70,7 +82,11 @@ class ApiHelper {
       debugPrint("Dio Error --> ${error.message}");
       final statusCode = error.response?.statusCode;
       Response? errorMessage = error.response;
-      return await _handleError(statusCode :statusCode, errorMessage: errorMessage,context: context);
+      return await _handleError(
+        statusCode: statusCode,
+        errorMessage: errorMessage,
+        context: context,
+      );
     } catch (e) {
       log("Multipart Error --> $e");
       await Utils.errorSnackBar(msg: "Something Went Wrong", context: context);
@@ -88,12 +104,14 @@ class ApiHelper {
       if (!await ConnectivityHelper.allConnectivityCheck(context: context)) {
         return null;
       }
+      String token = AppConfig.instanceInit()?.loginData.token ?? "";
       final formData = FormData.fromMap(body);
       for (var element in imageRequestObject) {
         if (element.path!.isNotEmpty && !element.path!.startsWith("http")) {
-          final mimeTypeData =
-              lookupMimeType(element.path!, headerBytes: [0xFF, 0xD8])
-                  ?.split('/');
+          final mimeTypeData = lookupMimeType(
+            element.path!,
+            headerBytes: [0xFF, 0xD8],
+          )?.split('/');
           if (mimeTypeData != null && mimeTypeData.length == 2) {
             formData.files.add(
               MapEntry(
@@ -111,8 +129,11 @@ class ApiHelper {
       }
 
       String url = Apis.baseUrl + urlEndPoint;
-      final response =
-          await Dio().post(Uri.parse(url).toString(), data: formData);
+      final response = await Dio().post(
+        Uri.parse(url).toString(),
+        options: Options(headers: {"Authorization": token}),
+        data: formData,
+      );
       debugPrint("URL --> $url");
       debugPrint("Response Data --> ${response.data}");
       if (response.statusCode == 200) {
@@ -124,7 +145,11 @@ class ApiHelper {
       debugPrint("Dio Error --> ${error.message}");
       final statusCode = error.response?.statusCode;
       Response? errorMessage = error.response;
-      return await _handleError(statusCode :statusCode, errorMessage: errorMessage,context: context);
+      return await _handleError(
+        statusCode: statusCode,
+        errorMessage: errorMessage,
+        context: context,
+      );
     } catch (e) {
       debugPrint("Multipart Error --> $e");
       await Utils.errorSnackBar(msg: "Something Went Wrong", context: context);
@@ -132,26 +157,43 @@ class ApiHelper {
     }
   }
 
-  static Future<void> _handleError(
-      {int? statusCode, Response? errorMessage, required BuildContext context}) async {
-    if(statusCode == 400){
+  static Future<void> _handleError({
+    int? statusCode,
+    Response? errorMessage,
+    required BuildContext context,
+  }) async {
+    if (statusCode == 400) {
       return errorMessage!.data;
-    }else if(statusCode == 401){
+    } else if (statusCode == 401) {
       log("errorStatus(401)-->${errorMessage.toString()}");
-      return await Utils.errorSnackBar(msg: errorMessage!.data.toString(), context: context);
-    }else if(statusCode == 404){
+      return await Utils.errorSnackBar(
+        msg: errorMessage!.data.toString(),
+        context: context,
+      );
+    } else if (statusCode == 404) {
       log("errorStatus(404)-->${errorMessage.toString()}");
-      return await Utils.errorSnackBar(msg: errorMessage!.data.toString(), context: context);
-    }else if(statusCode == 415){
-      return await Utils.errorSnackBar(msg: errorMessage!.data.toString(), context: context);
-    } else if(statusCode == 500){
-      return await Utils.errorSnackBar(msg: errorMessage!.statusMessage.toString(), context: context);
-    } else{
-      return await Utils.errorSnackBar(msg: errorMessage!.data.toString(), context: context);
+      return await Utils.errorSnackBar(
+        msg: errorMessage!.data.toString(),
+        context: context,
+      );
+    } else if (statusCode == 415) {
+      return await Utils.errorSnackBar(
+        msg: errorMessage!.data.toString(),
+        context: context,
+      );
+    } else if (statusCode == 500) {
+      return await Utils.errorSnackBar(
+        msg: errorMessage!.statusMessage.toString(),
+        context: context,
+      );
+    } else {
+      return await Utils.errorSnackBar(
+        msg: errorMessage!.data.toString(),
+        context: context,
+      );
     }
   }
 }
-
 
 class ImageRequestObject {
   String? key;
