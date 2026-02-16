@@ -6,8 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:steel_contractor/Utils/Utils.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
+import 'package:steel_contractor/features/Backfilling/presentation/widgets/confirmation_widget.dart';
 import 'package:steel_contractor/features/ClearingGrading/domain/model/ReportActivityModel.dart';
 import 'package:steel_contractor/features/ClearingGrading/helper/clearing_grading_helper.dart';
+import 'package:steel_contractor/features/Home/domain/model/tpi_model.dart';
+import 'package:steel_contractor/features/Home/helper/home_helper.dart';
+import 'package:steel_contractor/features/Home/presentation/page/home_page.dart';
 import 'package:steel_contractor/features/Restoration/helper/restoration_helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -25,6 +29,7 @@ class RestorationBloc extends Bloc<RestorationEvent, RestorationState> {
     on<ActivityRejectEvent>(_activityReject);
     on<DownloadPdfEvent>(_downloadPdf);
     on<ImageViewEvent>(_imageView);
+    on<SelectTpiEvent>(_tpiChanged);
   }
 
   bool isLoader = false;
@@ -41,6 +46,9 @@ class RestorationBloc extends Bloc<RestorationEvent, RestorationState> {
   Set<String> selectedRowIds = {};
   bool isAllSelected = false;
 
+  TpiModel tpiValue = TpiModel();
+  List<TpiModel> listOfTpi = [];
+
   _pageLoad(RestorationPageLoadEvent event, emit) async {
     emit(RestorationPageLoadState());
     isLoader = false;
@@ -54,7 +62,10 @@ class RestorationBloc extends Bloc<RestorationEvent, RestorationState> {
     listOfFilterReportActivity = [];
     selectedRowIds = {};
      isAllSelected = false;
+    tpiValue = TpiModel();
+    listOfTpi = [];
     await fetchReportActivity(context: event.context);
+    listOfTpi =  (await HomeHelper.tpiApi(context: event.context))??[];
     _eventCompleted(emit);
   }
 
@@ -122,72 +133,127 @@ class RestorationBloc extends Bloc<RestorationEvent, RestorationState> {
     required String remark,
   }) async {
     try {
-      var res = await ClearingGradingHelper.saveActivityApproveReject(
+      var res = await HomeHelper.saveActivityApproveReject(
         context: context,
         status: status,
         remark: remark,
+          tpiValue: tpiValue
       );
-      if (res != null) {}
+      if (res != null) {
+        return  Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+      }
     } catch (e) {
       log("updateFeasibility-->${e.toString()}");
     }
   }
+  void _openConfirmationDialog({
+    required BuildContext context,
+    required String status,
+    required bool showDropdown,
+  }) {
+    remarksController.clear();
+    tpiValue = TpiModel();
+    isBtnLoader = false;
 
-
-  _activityApproved(ActivityApprovedEvent event, emit) async {
-    return RestorationHelper.showConfirmationDialog(
-      context: event.context,
-      emit: emit,
-      isApproval: true,
-      remarksController:TextEditingController(text: ""),
-      onConfirm: () async {
-        isBtnLoader = true;
-        _eventCompleted(emit);
-        await _submit(
-          status: "1",
-          remark: "",
-          context: event.context,
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (dialogContext) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return ConfirmationDialog(
+              title: "Confirm?",
+              message: "Are you sure you want to ${status == "1" ? "approve" : "reject"}?",
+              showDropdown: showDropdown,
+              remarksController: remarksController,
+              isBtnLoading: isBtnLoader,
+              dropdownValue: tpiValue,
+              items: listOfTpi,
+              onChanged: showDropdown
+                  ? (val) {
+                setState(() {
+                  tpiValue = val!;
+                });
+              }
+                  : null,
+              onCancel: () {
+                Navigator.pop(dialogContext);
+              },
+              onConfirm: () async {
+                if (showDropdown && tpiValue.iD == null) {
+                  Utils.errorSnackBar(
+                    msg: "TPI is required",
+                    context: context,
+                  );
+                  return;
+                }
+                if (remarksController.text.isEmpty) {
+                  Utils.errorSnackBar(
+                    msg: "Remarks required",
+                    context: context,
+                  );
+                  return;
+                }
+                setState(() => isBtnLoader = true);
+                try {
+                  await _submit(
+                    status: status,
+                    remark: remarksController.text.trim(),
+                    context: context,
+                  );
+                  Navigator.pop(dialogContext);
+                } finally {
+                  if (context.mounted) {
+                    setState(() => isBtnLoader = false);
+                  }
+                }
+              },
+            );
+          },
         );
-        isBtnLoader = false;
-        _eventCompleted(emit);
       },
     );
   }
 
-  _activityReject(ActivityRejectEvent event, emit) async {
-    remarksController.text = "";
-    return RestorationHelper.showConfirmationDialog(
+  _activityApproved(ActivityApprovedEvent event, emit) {
+    _openConfirmationDialog(
       context: event.context,
-      emit: emit,
-      isApproval: false,
-      remarksController: remarksController,
-      onConfirm: () async {
-        isBtnLoader = true;
-        _eventCompleted(emit);
-        await _submit(
-          status: "2",
-          remark: remarksController.text.trim(),
-          context: event.context,
-        );
-        isBtnLoader = false;
-        _eventCompleted(emit);
-      },
+      status: "1",
+      showDropdown: true,
+    );
+  }
+
+  _activityReject(ActivityRejectEvent event, emit) {
+    _openConfirmationDialog(
+      context: event.context,
+      status: "2",
+      showDropdown: false,
     );
   }
 
   _downloadPdf(DownloadPdfEvent event, emit) async {
-    for (var data in listOfFilterReportActivity) {
-      if (data.attachFile != null && data.attachFile!.isNotEmpty) {
-        final Uri uri = Uri.parse(event.url);
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        } else {
-          ScaffoldMessenger.of(event.context).showSnackBar(
-            const SnackBar(content: Text("File not found on server (404)")),
-          );
-          throw 'Could not launch ${event.url}';
-        }
+    if (event.url.isEmpty|| event.url.isEmpty) {
+      ScaffoldMessenger.of(event.context).showSnackBar(
+        const SnackBar(content: Text("Invalid file URL")),
+      );
+      return;
+    }
+    final Uri uri = Uri.parse(event.url);
+    try {
+      print("Launching URL: $uri");
+
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        throw Exception("Could not launch");
       }
+    } catch (e) {
+      ScaffoldMessenger.of(event.context).showSnackBar(
+        SnackBar(content: Text("Error opening file: $e")),
+      );
     }
     _eventCompleted(emit);
   }
@@ -206,6 +272,11 @@ class RestorationBloc extends Bloc<RestorationEvent, RestorationState> {
         }
       }
     }
+    _eventCompleted(emit);
+  }
+
+  _tpiChanged(SelectTpiEvent event, emit) {
+    tpiValue = event.tpiValue;
     _eventCompleted(emit);
   }
 

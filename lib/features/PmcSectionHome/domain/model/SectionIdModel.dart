@@ -1,18 +1,17 @@
 class SectionIdModel {
   int? success;
   bool? error;
-  List<SectionIdData>? data;
+  dynamic data;
 
   SectionIdModel({this.success, this.error, this.data});
 
   SectionIdModel.fromJson(Map<String, dynamic> json) {
     success = json['success'] ?? "";
     error = json['error'] ?? "";
-    if (json['data'] != null) {
-      data = <SectionIdData>[];
-      json['data'].forEach((v) {
-        data!.add(new SectionIdData.fromJson(v));
-      });
+    if (json['data'] is List) {
+      data = (json['data'] as List).map((v) => SectionIdData.fromJson(v)).toList();
+    } else if (json['data'] is String) {
+      data = json['data'] ?? "";
     }
   }
 

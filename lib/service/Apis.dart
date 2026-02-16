@@ -15,5 +15,6 @@ class Apis {
   static get activityBySection  => "steel/GetActivitybySection?";
   static get reportByActivityId  => "steel/GetReportByActivityId?";
   static get pmcReportSectionId  => "steel/PmcReportbySecandspread?";
+  static get tpiApi  => "steel/get-activity-user-by-role?";
   static get activityApproveRouSurvey  => "steel/activityapproveRouSurvey";
 }

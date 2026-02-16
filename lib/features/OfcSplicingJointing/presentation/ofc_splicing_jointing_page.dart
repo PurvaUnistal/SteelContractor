@@ -209,7 +209,7 @@ class _OfcSplicingJointingPageState extends State<OfcSplicingJointingPage> {
                           cells: <DataCell>[
                             CommonStyle.dataCell(label: (dataState.listOfFilterReportActivity.indexOf(user) + 1 + (dataState.pageNo - 1) * 10).toString()),
                             DataCell(
-                              user.attachFile!.isNotEmpty
+                              user.downloadLink!.isNotEmpty
                                   ? InkWell(
                                 onTap: () {
                                   BlocProvider.of<OfcSplicingJointingBloc>(

@@ -27,7 +27,15 @@ class EnvironmentConfig extends InheritedWidget {
       case EnvironmentFlavor.prodIGL:
         return "https://igl.smartgasnet.com/api/";
       case EnvironmentFlavor.prodMGL:
-        return "https://mgl.smartgasnet.com/api/";
+        return "https://mgldev.smartgasnet.com/api/";
+      case EnvironmentFlavor.prodUnistal:
+        return "https://unistaldev.plcms.net/api/";
+      case EnvironmentFlavor.prodOilIndia:
+        return "https://hpoil.smartgasnet.com/api/";
+      case EnvironmentFlavor.prodVPPL:
+        return "https://vppl.plcms.net/api/";
+      case EnvironmentFlavor.prodVRPL:
+        return "https://vrpl.plcms.net/api/";
     }
   }
 
@@ -41,6 +49,14 @@ class EnvironmentConfig extends InheritedWidget {
           return Colors.yellow.shade800;
         case EnvironmentFlavor.prodMGL:
           return Colors.green.shade800;
+        case EnvironmentFlavor.prodUnistal:
+          return Colors.blue.shade800;
+        case EnvironmentFlavor.prodOilIndia:
+          return Colors.red.shade700;
+        case EnvironmentFlavor.prodVPPL:
+          return Colors.green.shade800;
+        case EnvironmentFlavor.prodVRPL:
+          return Colors.amber.shade400;
       }
     }
   
@@ -54,6 +70,14 @@ class EnvironmentConfig extends InheritedWidget {
           return Colors.green.shade800;
         case EnvironmentFlavor.prodMGL:
           return Colors.yellow.shade800;
+        case EnvironmentFlavor.prodUnistal:
+          return Colors.blue.shade800;
+        case EnvironmentFlavor.prodOilIndia:
+          return Colors.red.shade700;
+        case EnvironmentFlavor.prodVPPL:
+          return Colors.green.shade800;
+        case EnvironmentFlavor.prodVRPL:
+          return Colors.amber.shade400;
       }
     }
 }

@@ -7,9 +7,8 @@ plugins {
 
 android {
     namespace = "unistal"
-    compileSdk = 35
+    compileSdk = 36
     ndkVersion = "27.0.12077973"
-    /*ndkVersion = flutter.ndkVersion*/
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -26,9 +25,11 @@ android {
         create("prodPBGPL") {
             dimension = "version"
             applicationIdSuffix = ".pbgpl.steel.contractor"
-            resValue("string", "app_name", "MGL Steel Contractor")
+            resValue("string", "app_name", "PBGPL Steel Contractor")
             manifestPlaceholders.put("appIcon", "@mipmap/pbgpl_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/pbgpl_logo")
+            versionCode = 1
+            versionName = "1.0.0-PBGPL Contractor"
         }
         create("prodMGL") {
             dimension = "version"
@@ -36,7 +37,49 @@ android {
             resValue("string", "app_name", "MGl Contractor")
             manifestPlaceholders.put("appIcon", "@mipmap/mgl_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/mgl_logo")
+            versionCode = 1
+            versionName = "1.0.0-MGL Contractor"
         }
+        create("prodUnistal") {
+            dimension = "version"
+            applicationIdSuffix = ".unistal.steel.contractor"
+            resValue("string", "app_name", "Contractor")
+            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+            versionCode = 1
+            versionName = "1.0.0-Unistal Contractor"
+        }
+
+        create("prodOilIndia") {
+            dimension = "version"
+            applicationIdSuffix = ".OilIndia.steel.contractor"
+            resValue("string", "app_name", "Contractor")
+            manifestPlaceholders.put("appIcon", "@mipmap/oil_india_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/oil_india_logo")
+            versionCode = 1
+            versionName = "1.0.0-Oil India Contractor"
+        }
+
+        create("prodVPPL") {
+            dimension = "version"
+            applicationIdSuffix = ".vppl.steel.contractor"
+            resValue("string", "app_name", "VPPL Contractor")
+            manifestPlaceholders.put("appIcon", "@mipmap/vppl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vppl_plcms")
+            versionCode = 1
+            versionName = "1.0.0-VPPL Contractor"
+        }
+
+        create("prodVRPL") {
+            dimension = "version"
+            applicationIdSuffix = ".vrpl.steel.contractor"
+            resValue("string", "app_name", "VRPL Contractor")
+            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
+            versionCode = 1
+            versionName = "1.0.0-VRPL Contractor"
+        }
+
     }
 
 
@@ -46,9 +89,7 @@ android {
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
-        targetSdk = 35
-        versionCode = flutter.versionCode
-        versionName = flutter.versionName
+        targetSdk = 36
     }
 
     buildTypes {

@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:steel_contractor/features/ClearingGrading/domain/model/ReportActivityModel.dart' show ReportActivityData;
+import 'package:steel_contractor/features/Home/domain/model/tpi_model.dart';
 
 abstract class NDTMUTEvent extends Equatable {}
 
@@ -89,4 +90,12 @@ class ImageViewEvent extends NDTMUTEvent {
   @override
   // TODO: implement props
   List<Object> get props => [url,context];
+}
+
+class SelectTpiEvent extends NDTMUTEvent {
+  final TpiModel tpiValue;
+  SelectTpiEvent({required this.tpiValue,});
+  @override
+  // TODO: implement props
+  List<Object> get props => [tpiValue];
 }

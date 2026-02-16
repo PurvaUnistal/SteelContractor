@@ -32,15 +32,14 @@ class _LoginPageState extends State<LoginPage> {
     BlocProvider.of<LoginBloc>(context).add(LoginPageLoadingEvent());
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<LoginBloc, LoginState>(
         builder: (context, state) {
           if (state is LoginFetchDataState) {
-            return Center(
-              child: _buildLayout(dataState: state),
-            );
+            return Center(child: _buildLayout(dataState: state));
           } else {
             return const Center(child: CircularProgressIndicator());
           }
@@ -48,6 +47,7 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
   Widget _buildLayout({required LoginFetchDataState dataState}) {
     return Stack(
       children: [
@@ -63,10 +63,13 @@ class _LoginPageState extends State<LoginPage> {
         ),
         Center(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(
+              vertical: 20.0,
+              horizontal: 8.0,
+            ),
             child: Card(
               elevation: 8.0,
-             // shadowColor: AppColor.yellow800,
+              // shadowColor: AppColor.yellow800,
               color: Colors.white.withOpacity(0.8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
@@ -80,20 +83,34 @@ class _LoginPageState extends State<LoginPage> {
                     CommonStyle.vertical(context: context),
                     Text(
                       AppConfig.instanceInit()!.client == Client.purbaBharati
-                     ? 'Purba Bharati Gas Pvt. Ltd'
-                     : 'Mahanagar Gas Pvt',
+                          ? 'Purba Bharati Gas Pvt. Ltd'
+                     : AppConfig.instanceInit()!.client == Client.unistal
+                          ? 'Unistal System Pvt. Ltd'
+                          : AppConfig.instanceInit()!.client == Client.oilIndia
+                          ? 'Oil India'
+                          : AppConfig.instanceInit()!.client == Client.vppl
+                          ? 'VPPL System Pvt. Ltd'
+                          : AppConfig.instanceInit()!.client == Client.vrpl
+                          ? 'VRPL System Pvt. Ltd'
+                          : 'Unistal System Pvt. Ltd',
                       style: TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,
-                        foreground: Paint()
-                          ..shader = LinearGradient(
-                            colors: <Color>[
-                              EnvironmentConfig.of(context)!.secondaryTheme,
-                              EnvironmentConfig.of(context)!.primaryTheme,
-                            ],
-                          ).createShader(
-                            Rect.fromLTWH(0.0, 0.0, 300.0, 0.0), // Width controls gradient spread
-                          ),
+                        foreground:
+                            Paint()
+                              ..shader = LinearGradient(
+                                colors: <Color>[
+                                  EnvironmentConfig.of(context)!.secondaryTheme,
+                                  EnvironmentConfig.of(context)!.primaryTheme,
+                                ],
+                              ).createShader(
+                                Rect.fromLTWH(
+                                  0.0,
+                                  0.0,
+                                  300.0,
+                                  0.0,
+                                ), // Width controls gradient spread
+                              ),
                       ),
                     ),
 
@@ -139,7 +156,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: h * 0.6,
                 child: Card(
                   elevation: 8,
-                 // shadowColor: AppColor.,
+                  // shadowColor: AppColor.,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -159,12 +176,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Positioned(
-            top: -80,
-            left: .0,
-            right: .0,
-            child: _logoWidget(),
-          ),
+          Positioned(top: -80, left: .0, right: .0, child: _logoWidget()),
         ],
       ),
     );
@@ -176,11 +188,7 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Image.asset(
-        AppConfig.instanceInit()!.client == Client.purbaBharati
-            ? AppIcon.pbgLogo
-            :AppConfig.instanceInit()!.client == Client.mahaNagar
-            ? AppIcon.mglLogo
-            : AppIcon.pbgLogo,
+        AppIcon.logo(),
         width: w * 0.4,
         height: h * 0.16,
       ),
@@ -207,10 +215,16 @@ class _LoginPageState extends State<LoginPage> {
       controller: dataState.passwordController,
       prefixIcon: IconButtonWidget(iconData: Icons.password, onPressed: () {}),
       suffixIcon: IconButtonWidget(
-          iconData: dataState.isPassword ? Icons.visibility_off : Icons.visibility,
-          onPressed: () {
-            BlocProvider.of<LoginBloc>(context).add(LoginHideShowPasswordEvent(isHideShow: dataState.isPassword == true ? false : true));
-          }),
+        iconData:
+            dataState.isPassword ? Icons.visibility_off : Icons.visibility,
+        onPressed: () {
+          BlocProvider.of<LoginBloc>(context).add(
+            LoginHideShowPasswordEvent(
+              isHideShow: dataState.isPassword == true ? false : true,
+            ),
+          );
+        },
+      ),
       obscureText: dataState.isPassword,
     );
   }
@@ -218,12 +232,15 @@ class _LoginPageState extends State<LoginPage> {
   Widget _loginBtnWidget({required LoginFetchDataState dataState}) {
     return dataState.isPageLoader == false
         ? ButtonWidget(
-        text: AppString.login,
-        onPressed: () {
-          FocusScope.of(context).unfocus();
-          TextInput.finishAutofillContext();
-          BlocProvider.of<LoginBloc>(context).add(LoginSubmitDataEvent(context: context, isLoginLoading: true));
-        })
+          text: AppString.login,
+          onPressed: () {
+            FocusScope.of(context).unfocus();
+            TextInput.finishAutofillContext();
+            BlocProvider.of<LoginBloc>(
+              context,
+            ).add(LoginSubmitDataEvent(context: context, isLoginLoading: true));
+          },
+        )
         : DottedLoaderWidget();
   }
 }

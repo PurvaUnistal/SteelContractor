@@ -28,6 +28,7 @@ class ActivitySectionModel {
 }
 
 class ActivitySectionData {
+  String? activityType;
   String? sortOrder;
   String? weightage;
   String? formateNo;
@@ -49,6 +50,7 @@ class ActivitySectionData {
 
   ActivitySectionData(
       {this.sortOrder,
+        this.activityType,
         this.weightage,
         this.formateNo,
         this.id,
@@ -68,6 +70,7 @@ class ActivitySectionData {
         this.endDate});
 
   ActivitySectionData.fromJson(Map<String, dynamic> json) {
+    activityType = json['activity_type'];
     sortOrder = json['sort_order'];
     weightage = json['weightage'];
     formateNo = json['formate_no'];
@@ -90,6 +93,7 @@ class ActivitySectionData {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['activity_type'] = this.activityType;
     data['sort_order'] = this.sortOrder;
     data['weightage'] = this.weightage;
     data['formate_no'] = this.formateNo;

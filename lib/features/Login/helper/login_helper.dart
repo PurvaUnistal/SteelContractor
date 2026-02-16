@@ -69,6 +69,7 @@ class LoginHelper {
             || res["user"]["role"] =="pmc"
             || res["user"]["role"] == "client"
             || res["user"]["role"] == "engineer"
+            || res["user"]["role"] == "steel contractor"
         ) {
           await Utils.successSnackBar(msg: res["messages"], context: context);
           String baseUrl = Apis.loginUrl.replaceAll("api/auth", "");

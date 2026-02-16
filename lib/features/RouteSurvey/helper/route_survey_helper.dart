@@ -74,6 +74,7 @@ class RouteSurveyHelper {
                               : Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
+
                               TextButton(
                                 onPressed: () async {
                                   if(remarksController.text.isEmpty && !isApproval){

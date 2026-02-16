@@ -22,8 +22,5 @@ class FetchHomeDataState extends HomeInitial {
   });
 
   @override
-  List<Object> get props => [
-
-    listActivityData,
-      ];
+  List<Object> get props => [listActivityData];
 }

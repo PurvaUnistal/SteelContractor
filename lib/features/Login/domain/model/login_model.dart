@@ -57,6 +57,8 @@ class User {
   final List<Accessright>? accessright;
   final String? spreadId;
   final String? sectionId;
+  final String? smartLogo;
+  final String? projectLogo;
 
   User({
     this.id,
@@ -71,6 +73,8 @@ class User {
     this.accessright,
     this.spreadId,
     this.sectionId,
+    this.smartLogo,
+    this.projectLogo,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -83,9 +87,11 @@ class User {
     modules: json["modules"] ?? "",
     schema: json["schema"] ?? "",
     role: json["role"] ?? "",
-    accessright: List<Accessright>.from(json["accessright"].map((x) => Accessright.fromJson(x))),
+    accessright: json["accessright"] == null ? []: List<Accessright>.from(json["accessright"].map((x) => Accessright.fromJson(x))),
     spreadId: json["spread_id"] ?? "",
     sectionId: json["section_id"] ?? "",
+    smartLogo: json["smartLogo"] ?? "",
+    projectLogo: json["projectLogo"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -101,6 +107,8 @@ class User {
     "accessright": List<dynamic>.from(accessright!.map((x) => x.toJson())),
     "spread_id": spreadId,
     "section_id": sectionId,
+    "smartLogo": smartLogo,
+    "projectLogo": projectLogo,
   };
 }
 

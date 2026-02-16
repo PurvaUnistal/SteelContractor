@@ -208,7 +208,7 @@ class _RouHandoverPageState extends State<RouHandoverPage> {
                           cells: <DataCell>[
                             CommonStyle.dataCell(label: (dataState.listOfFilterReportActivity.indexOf(user) + 1 + (dataState.pageNo - 1) * 10).toString()),
                             DataCell(
-                              user.attachFile!.isNotEmpty
+                              user.downloadLink!.isNotEmpty
                                   ? InkWell(
 
                                 onTap: () {

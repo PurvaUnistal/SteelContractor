@@ -78,7 +78,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
                 key: PrefsValue.buildNumber,
                 value: packageInfo.buildNumber,
               );
-              if(loginModel.user?.role == "pmc"){
+              if(loginModel.user?.role == "pmc" || loginModel.user?.role == "steel contractor" || loginModel.user?.role == "client"){
                 Navigator.pushReplacementNamed(
                   event.context,
                   RoutesName.sectionIdPage,

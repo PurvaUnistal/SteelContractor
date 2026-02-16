@@ -88,3 +88,11 @@ class ImageViewEvent extends ClearingGradingEvent {
   // TODO: implement props
   List<Object> get props => [url,context];
 }
+
+class SelectTpiEvent extends ClearingGradingEvent {
+  final TpiModel tpiValue;
+  SelectTpiEvent({required this.tpiValue,});
+  @override
+  // TODO: implement props
+  List<Object> get props => [tpiValue];
+}

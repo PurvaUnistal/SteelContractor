@@ -214,7 +214,7 @@ class _ClearingGradingPageState extends State<ClearingGradingPage> {
                                     label: (dataState.listOfFilterReportActivity.indexOf(user) + 1 + (dataState.pageNo - 1) * 10).toString(),
                                   ),
                                   DataCell(
-                                    user.attachFile!.isNotEmpty
+                                    user.downloadLink!.isNotEmpty
                                         ? InkWell(
 
                                       onTap: () {

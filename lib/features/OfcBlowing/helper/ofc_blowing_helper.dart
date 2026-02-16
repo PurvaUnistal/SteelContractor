@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:steel_contractor/Utils/Utils.dart';
 import 'package:steel_contractor/Utils/common_widgets/Loader/DottedLoader.dart';
 import 'package:steel_contractor/Utils/common_widgets/Routes/routes.dart';
+import 'package:steel_contractor/Utils/common_widgets/dropdown_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_string.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/common_style.dart';
 import 'package:steel_contractor/Utils/common_widgets/text_form_widget.dart';
@@ -58,7 +59,8 @@ class OfcBlowingHelper {
                             textAlign: TextAlign.center,
                           ),
                           CommonStyle.vertical(context: context),
-                          if (!isApproval)
+                        //  if (!isApproval)
+                    //      DropdownWidget(dropdownValue: dropdownValue, onChanged: onChanged, items: items, hint: hint)
                             TextFieldWidget(
                               star: AppString.star,
                               label: AppString.remarks,

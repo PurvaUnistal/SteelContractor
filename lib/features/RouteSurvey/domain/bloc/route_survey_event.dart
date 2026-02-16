@@ -77,3 +77,11 @@ class ImageViewEvent extends RouteSurveyEvent {
   // TODO: implement props
   List<Object> get props => [url,context];
 }
+
+class SelectTpiEvent extends RouteSurveyEvent {
+  final TpiModel tpiValue;
+  SelectTpiEvent({required this.tpiValue,});
+  @override
+  // TODO: implement props
+  List<Object> get props => [tpiValue];
+}

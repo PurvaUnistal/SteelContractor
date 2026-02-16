@@ -216,7 +216,7 @@ class _RouteSurveyPageState extends State<RouteSurveyPage> {
                                             .toString(),
                                   ),
                                   DataCell(
-                                    user.attachFile!.isNotEmpty
+                                    user.downloadLink!.isNotEmpty
                                         ? InkWell(
                                       onTap: () {
                                             BlocProvider.of<RouteSurveyBloc>(

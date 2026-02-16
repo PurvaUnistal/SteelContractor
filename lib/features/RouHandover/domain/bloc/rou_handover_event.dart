@@ -80,3 +80,11 @@ class ImageViewEvent extends RouHandoverEvent {
   // TODO: implement props
   List<Object> get props => [url,context];
 }
+
+class SelectTpiEvent extends RouHandoverEvent {
+  final TpiModel tpiValue;
+  SelectTpiEvent({required this.tpiValue,});
+  @override
+  // TODO: implement props
+  List<Object> get props => [tpiValue];
+}

@@ -45,7 +45,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   Future<LoginModel?> _getData() async {
     try {
-      String? userJson = await SharedPref.getString(key: PrefsValue.userInfo ?? "");
+      String? userJson = await SharedPref.getString(
+        key: PrefsValue.userInfo ?? "",
+      );
       if (userJson != '') {
         Map<String, dynamic> userMap = jsonDecode(userJson!);
         LoginModel loginModel = LoginModel.fromJson(userMap);
@@ -65,58 +67,46 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     final email = await SharedPref.getString(key: PrefsValue.emailVal);
     final password = await SharedPref.getString(key: PrefsValue.passwordVal);
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    final newVersion  = await packageInfo.buildNumber;
-    AppConfig.instanceInit()?.setBuildNumber(buildNumber: packageInfo.buildNumber);
+    final newVersion = await packageInfo.buildNumber;
+    AppConfig.instanceInit()?.setBuildNumber(
+      buildNumber: packageInfo.buildNumber,
+    );
     final oldVersion = await SharedPref.getString(key: PrefsValue.buildNumber);
-    Timer(
-        const Duration(seconds: 3),
-            () async {
-          if (oldVersion == newVersion) {
-            if (email.isNotEmpty || password.isNotEmpty) {
-              if(AppConfig.instanceInit()?.loginData.user?.role == "pmc"){
-                Navigator.pushReplacementNamed(
-                  context,
-                  RoutesName.sectionIdPage,
-                );
-              }else{
-                Navigator.pushReplacementNamed(
-                  context,
-                  RoutesName.home,
-                );
-              }
-            }
+    Timer(const Duration(seconds: 3), () async {
+      if (oldVersion == newVersion) {
+        if (email.isNotEmpty || password.isNotEmpty) {
+          if (AppConfig.instanceInit()?.loginData.user?.role == "pmc" ||
+              AppConfig.instanceInit()?.loginData.user?.role == "steel contractor" ||
+              AppConfig.instanceInit()?.loginData.user?.role == "client") {
+            Navigator.pushReplacementNamed(context, RoutesName.sectionIdPage);
           } else {
-            await SharedPref.clearAll();
-            Navigator.pushReplacementNamed(
-              context,
-              RoutesName.login,
-            );
+            Navigator.pushReplacementNamed(context, RoutesName.home);
           }
-        });
+        }
+      } else {
+        await SharedPref.clearAll();
+        Navigator.pushReplacementNamed(context, RoutesName.login);
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: AppColor.white,
-        body: Center(
-          child: ScaleTransition(
-            scale: _animation,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                AppConfig.instanceInit()!.client == Client.agcl
-                    ? AppIcon.agclLogo
-                    : AppConfig.instanceInit()!.client == Client.purbaBharati
-                    ? AppIcon.pbgLogo
-                    : AppConfig.instanceInit()!.client == Client.mahaNagar
-                    ? AppIcon.mglLogo
-                    : AppIcon.pbgLogo,
-                height: MediaQuery.of(context).size.height * 0.3,
-                width: MediaQuery.of(context).size.width * 0.6,
-              ),
+      backgroundColor: AppColor.white,
+      body: Center(
+        child: ScaleTransition(
+          scale: _animation,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset(
+              AppIcon.logo(),
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.width * 0.6,
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

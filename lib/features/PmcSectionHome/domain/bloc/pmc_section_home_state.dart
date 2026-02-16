@@ -16,15 +16,17 @@ class PmcSectionHomePageLoadState extends PmcSectionHomeInitial {
 }
 
 class FetchPmcSectionHomeDataState extends PmcSectionHomeInitial {
+  final SectionIdModel sectionIdModel;
   final List<SectionIdData> listOfSectionId;
 
   FetchPmcSectionHomeDataState({
+    required this.sectionIdModel,
     required this.listOfSectionId,
   });
 
   @override
   List<Object> get props => [
-
+    sectionIdModel,
     listOfSectionId,
       ];
 }

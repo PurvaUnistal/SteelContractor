@@ -25,6 +25,7 @@ class ApiHelper {
         Uri.parse(url).toString(),
         options: Options(headers: {"Authorization": token}),
       );
+      log("headers --> ${{"Authorization": token}}");
       log("URL --> $url");
       log("Response Data --> ${response.data}");
       if (response.statusCode == 200) {

@@ -32,7 +32,7 @@ class _SectionIdPageState extends State<SectionIdPage> {
       child:Scaffold(
         // drawer: PmcSectionHomeDrawerWidget(),
         appBar: AppBarWidget(
-          title:"PMC Section Home",
+          title:"${AppConfig.instanceInit()?.loginData.user?.role.toString().toUpperCase()} Section Home",
           actions: [
             Builder(
               builder: (context) => IconButton(
@@ -63,7 +63,7 @@ class _SectionIdPageState extends State<SectionIdPage> {
 
   Widget _buildLayout({required FetchPmcSectionHomeDataState dataState}) {
 
-    return ListView.builder(
+    return dataState.sectionIdModel.success == 400 ? Center(child: Text("No records found")): ListView.builder(
       itemCount: dataState.listOfSectionId.length,
       itemBuilder: (BuildContext context, int i) {
         final data = dataState.listOfSectionId[i];

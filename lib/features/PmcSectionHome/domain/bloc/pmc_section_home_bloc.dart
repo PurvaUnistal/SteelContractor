@@ -9,16 +9,26 @@ class PmcSectionHomeBloc extends Bloc<PmcSectionHomeEvent, PmcSectionHomeState> 
     on<PmcSectionHomePageLoadEvent>(_pageLoad);
   }
 
+  SectionIdModel sectionIdModel = SectionIdModel();
   List<SectionIdData> listOfSectionId = [];
+
   _pageLoad(PmcSectionHomePageLoadEvent event, emit) async {
     emit(PmcSectionHomePageLoadState());
+    sectionIdModel = SectionIdModel();
     listOfSectionId = [];
-    listOfSectionId = (await PmcSectionHomeHelper.pmcReportSectionIdApi(context: event.context))!;
+    var res = await PmcSectionHomeHelper.pmcReportSectionIdApi(context: event.context);
+    if(res != null){
+      sectionIdModel = res;
+      if(res.data!= null && res.data is List){
+        listOfSectionId = res.data;
+      }
+    }
     _eventCompleted(emit);
   }
 
   _eventCompleted(Emitter<PmcSectionHomeState> emit) {
     emit(FetchPmcSectionHomeDataState(
+      sectionIdModel: sectionIdModel,
       listOfSectionId: listOfSectionId,
     ));
   }
