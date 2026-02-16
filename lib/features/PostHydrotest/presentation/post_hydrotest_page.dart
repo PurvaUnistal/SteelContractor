@@ -82,8 +82,7 @@ class _PostHydrotestPageState extends State<PostHydrotestPage> {
       label: AppString.reportNumber,
       hintText: AppString.reportNumber,
       controller: dataState.reportNumberController,
-      keyboardType: TextInputType.number,
-      maxLength: 10,
+      keyboardType: TextInputType.text,
       suffixIcon: IconButtonWidget(
         iconData: Icons.search_rounded,
         onPressed: () {},

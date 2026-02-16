@@ -84,8 +84,7 @@ class _NDTLPTPageState extends State<NDTLPTPage> {
       label: AppString.reportNumber,
       hintText: AppString.reportNumber,
       controller: dataState.reportNumberController,
-      keyboardType: TextInputType.number,
-      maxLength: 10,
+      keyboardType: TextInputType.text,
       suffixIcon: IconButtonWidget(
         iconData: Icons.search_rounded,
         onPressed: () {},

@@ -68,7 +68,7 @@ class LoginHelper {
         res["user"]["role"] == "contractor"
             || res["user"]["role"] =="pmc"
             || res["user"]["role"] == "client"
-            || res["user"]["role"] == "engineer"
+            || res["user"]["role"] == "tpi"
             || res["user"]["role"] == "steel contractor"
         ) {
           await Utils.successSnackBar(msg: res["messages"], context: context);
