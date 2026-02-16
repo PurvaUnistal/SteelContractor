@@ -25,7 +25,7 @@ android {
         create("prodPBGPL") {
             dimension = "version"
             applicationIdSuffix = ".pbgpl.steel.contractor"
-            resValue("string", "app_name", "PBGPL Steel Contractor")
+            resValue("string", "app_name", "PBGPL Approval")
             manifestPlaceholders.put("appIcon", "@mipmap/pbgpl_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/pbgpl_logo")
             versionCode = 1
@@ -34,7 +34,7 @@ android {
         create("prodMGL") {
             dimension = "version"
             applicationIdSuffix = ".mgl.steel.contractor"
-            resValue("string", "app_name", "MGl Contractor")
+            resValue("string", "app_name", "MGl Approval")
             manifestPlaceholders.put("appIcon", "@mipmap/mgl_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/mgl_logo")
             versionCode = 1
@@ -43,7 +43,7 @@ android {
         create("prodUnistal") {
             dimension = "version"
             applicationIdSuffix = ".unistal.steel.contractor"
-            resValue("string", "app_name", "Contractor")
+            resValue("string", "app_name", "Approval")
             manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
             versionCode = 1
@@ -53,7 +53,7 @@ android {
         create("prodOilIndia") {
             dimension = "version"
             applicationIdSuffix = ".OilIndia.steel.contractor"
-            resValue("string", "app_name", "Contractor")
+            resValue("string", "app_name", "Approval")
             manifestPlaceholders.put("appIcon", "@mipmap/oil_india_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/oil_india_logo")
             versionCode = 1
@@ -63,7 +63,7 @@ android {
         create("prodVPPL") {
             dimension = "version"
             applicationIdSuffix = ".vppl.steel.contractor"
-            resValue("string", "app_name", "VPPL Contractor")
+            resValue("string", "app_name", "VPPL Approval")
             manifestPlaceholders.put("appIcon", "@mipmap/vppl_plcms")
             manifestPlaceholders.put("appIconRound", "@mipmap/vppl_plcms")
             versionCode = 1
@@ -73,7 +73,7 @@ android {
         create("prodVRPL") {
             dimension = "version"
             applicationIdSuffix = ".vrpl.steel.contractor"
-            resValue("string", "app_name", "VRPL Contractor")
+            resValue("string", "app_name", "VRPL Approval")
             manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
             manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
             versionCode = 1
