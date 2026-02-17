@@ -67,7 +67,7 @@ class WeldingBloc
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await WeldingHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

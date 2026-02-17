@@ -67,7 +67,7 @@ class TieInBloc
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await TieInHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

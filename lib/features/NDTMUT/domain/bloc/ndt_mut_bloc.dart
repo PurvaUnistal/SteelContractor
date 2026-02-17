@@ -67,7 +67,7 @@ class NDTMUTBloc
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await NDTMUTHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

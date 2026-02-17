@@ -10,7 +10,7 @@ import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_string.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/common_style.dart';
 import 'package:steel_contractor/Utils/common_widgets/text_form_widget.dart';
-import 'package:steel_contractor/features/ClearingGrading/domain/model/ActivityApproveRejectModel.dart';
+import 'package:steel_contractor/features/Home/domain/model/ActivityApproveRejectModel.dart';
 import 'package:steel_contractor/features/ClearingGrading/domain/model/ReportActivityModel.dart';
 import 'package:steel_contractor/features/Home/domain/model/ActivitySectionModel.dart';
 import 'package:steel_contractor/features/NDTMUT/domain/bloc/ndt_mut_bloc.dart';

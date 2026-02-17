@@ -70,7 +70,7 @@ class RestorationBloc extends Bloc<RestorationEvent, RestorationState> {
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await ClearingGradingHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

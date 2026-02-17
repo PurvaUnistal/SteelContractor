@@ -9,7 +9,7 @@ import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_string.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/common_style.dart';
 import 'package:steel_contractor/Utils/common_widgets/text_form_widget.dart';
-import 'package:steel_contractor/features/ClearingGrading/domain/model/ActivityApproveRejectModel.dart';
+import 'package:steel_contractor/features/Home/domain/model/ActivityApproveRejectModel.dart';
 import 'package:steel_contractor/features/ClearingGrading/domain/model/ReportActivityModel.dart';
 import 'package:steel_contractor/features/Crossing/domain/bloc/crossing_bloc.dart';
 import 'package:steel_contractor/features/Crossing/domain/bloc/crossing_state.dart';

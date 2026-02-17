@@ -12,7 +12,7 @@ import 'package:steel_contractor/Utils/common_widgets/res/common_style.dart';
 import 'package:steel_contractor/Utils/common_widgets/text_form_widget.dart';
 import 'package:steel_contractor/features/Backfilling/domain/bloc/backfilling_bloc.dart';
 import 'package:steel_contractor/features/Backfilling/domain/bloc/backfilling_state.dart';
-import 'package:steel_contractor/features/ClearingGrading/domain/model/ActivityApproveRejectModel.dart';
+import 'package:steel_contractor/features/Home/domain/model/ActivityApproveRejectModel.dart';
 import 'package:steel_contractor/features/ClearingGrading/domain/model/ReportActivityModel.dart';
 import 'package:steel_contractor/features/Home/domain/model/ActivitySectionModel.dart';
 import 'package:steel_contractor/service/Apis.dart';
@@ -25,10 +25,12 @@ class BackfillingHelper {
   }) async {
     try {
       String schema = await AppConfig.instanceInit()?.loginData.user?.schema ?? "";
+      String usedId = await AppConfig.instanceInit()?.loginData.user?.id ?? "";
       String role = await AppConfig.instanceInit()?.loginData.user?.role ?? "";
       ActivitySectionData? activityData = await AppConfig.instanceInit()?.activitySectionData;
       Map<String, String> para = {
         "schema": schema,
+        "userid": usedId,
         "activityid": activityData?.activityId ?? "",
         "role": role,
         "spread_id": activityData?.spreadId ?? "",

@@ -67,7 +67,7 @@ class NDTLPTBloc
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await NDTLPTHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

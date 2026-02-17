@@ -66,7 +66,7 @@ class CrossingBloc extends Bloc<CrossingEvent, CrossingState> {
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await CrossingHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

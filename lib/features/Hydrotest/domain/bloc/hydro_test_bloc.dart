@@ -65,7 +65,7 @@ class HydroTestBloc extends Bloc<HydroTestEvent, HydroTestState> {
   }
 
   fetchReportActivity({required BuildContext context}) async {
-    var res = await HydroTestHelper.reportByActivityIdAPI(
+    var res = await HomeHelper.reportByActivityIdAPI(
       context: context,
     );
     if (res != null) {

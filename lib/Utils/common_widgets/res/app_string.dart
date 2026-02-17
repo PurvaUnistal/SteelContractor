@@ -9,7 +9,7 @@ class AppString {
     Client.unistal: "11-06-2025",
     Client.oilIndia: "16-02-2026",
     Client.vppl: "28-01-2026",
-    Client.vrpl: "16-02-2026",
+    Client.vrpl: "17-02-2026",
   };
 
   static String get version => "Version : 1.0.0 - Steel Contractor-${_releaseDates[AppConfig.instanceInit()!.client] ?? ""}";
