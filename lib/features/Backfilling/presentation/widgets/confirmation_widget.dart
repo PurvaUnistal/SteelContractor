@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:steel_contractor/Utils/common_widgets/Loader/DottedLoader.dart';
 import 'package:steel_contractor/Utils/common_widgets/dropdown_widget.dart';
+import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
 import 'package:steel_contractor/Utils/common_widgets/text_form_widget.dart';
 import 'package:steel_contractor/features/Home/domain/model/tpi_model.dart';
 
@@ -35,6 +36,7 @@ class ConfirmationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final roleType = AppConfig.instanceInit()?.loginData.user!.role.toString();
     return Material(
       color: Colors.black54,
       child: Center(
@@ -57,42 +59,46 @@ class ConfirmationDialog extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
-                message,
-                textAlign: TextAlign.center,
-              ),
+              Text(message, textAlign: TextAlign.center),
 
               const SizedBox(height: 16),
               if (showDropdown && items != null)
-                DropdownWidget<TpiModel>(
-                  hint: "Select TPI",
-                  label: "Select TPI",
-                  dropdownValue: dropdownValue!.iD == null? null : dropdownValue,
+                roleType != null && roleType.toLowerCase().toString() == "client" ? SizedBox.shrink()
+                    :  DropdownWidget<TpiModel>(
+                  hint: roleType != null && roleType.toLowerCase().toString() == "tpi"
+                          ? "Select PMC"
+                          : roleType != null && roleType.toLowerCase().toString() == "pmc"
+                          ? "Select Client"
+                          :  "Select TPI",
+                  label: roleType != null && roleType.toLowerCase().toString() == "tpi"
+                      ? "Select PMC"
+                      : roleType != null && roleType.toLowerCase().toString() == "pmc"
+                      ? "Select Client"
+                      :  "Select TPI",
+                  dropdownValue:
+                      dropdownValue!.iD == null ? null : dropdownValue,
                   onChanged: onChanged,
                   items: items!,
                 ),
 
               if (showDropdown) const SizedBox(height: 16),
               TextFieldWidget(
-                  hintText: "Remarks",
-                  label: "Remarks",
-                  controller: remarksController,
-                ),
+                hintText: "Remarks",
+                label: "Remarks",
+                controller: remarksController,
+              ),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    isBtnLoading
-                        ? const DottedLoaderWidget()
-                        : TextButton(
-                      onPressed: onConfirm,
-                      child: const Text("OK"),
-                    ),
-                    TextButton(
-                      onPressed: onCancel,
-                      child: const Text("Cancel"),
-                    ),
-                  ],
-                ),
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  isBtnLoading
+                      ? const DottedLoaderWidget()
+                      : TextButton(
+                        onPressed: onConfirm,
+                        child: const Text("OK"),
+                      ),
+                  TextButton(onPressed: onCancel, child: const Text("Cancel")),
+                ],
+              ),
             ],
           ),
         ),
