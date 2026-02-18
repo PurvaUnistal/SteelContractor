@@ -83,9 +83,14 @@ class PostHydrotestBloc extends Bloc<PostHydrotestEvent, PostHydrotestState> {
   }
 
   _searchBpNumber(SearchBpNumberEvent event, emit) async {
-    reportNumberController.text = event.searchBpNumber;
-    if (event.searchBpNumber.length > 9) {
-    } else {}
+    String query = reportNumberController.text;
+    query = event.searchBpNumber;
+    if (event.searchBpNumber.length > 2) {
+      listOfFilterReportActivity =
+          listOfReportActivity.where((e)=> e.reportNo.toString().contains(query)).toList();
+    } else {
+      listOfFilterReportActivity = listOfReportActivity;
+    }
     _eventCompleted(emit);
   }
 
@@ -160,7 +165,8 @@ class PostHydrotestBloc extends Bloc<PostHydrotestEvent, PostHydrotestState> {
     remarksController.clear();
     tpiValue = TpiModel();
     isBtnLoader = false;
-
+    final roleType = AppConfig.instanceInit()?.loginData.user!.role.toString().toLowerCase();
+    final bool shouldShowDropdown = roleType == "client" ? false : showDropdown;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -170,7 +176,7 @@ class PostHydrotestBloc extends Bloc<PostHydrotestEvent, PostHydrotestState> {
             return ConfirmationDialog(
               title: "Confirm?",
               message: "Are you sure you want to ${status == "1" ? "approve" : "reject"}?",
-              showDropdown: showDropdown,
+              showDropdown: shouldShowDropdown,
               remarksController: remarksController,
               isBtnLoading: isBtnLoader,
               dropdownValue: tpiValue,
@@ -186,11 +192,13 @@ class PostHydrotestBloc extends Bloc<PostHydrotestEvent, PostHydrotestState> {
                 Navigator.pop(dialogContext);
               },
               onConfirm: () async {
-                if (showDropdown && tpiValue.iD == null) {
-                  Utils.errorSnackBar(
-                    msg: "TPI is required",
-                    context: context,
-                  );
+                if (shouldShowDropdown  && tpiValue.iD == null) {
+                  String msg = roleType == "tpi"
+                      ? "PMC is required"
+                      : roleType == "pmc"
+                      ? "Client is required"
+                      : "TPI is required";
+                  Utils.errorSnackBar(msg: msg, context: context,);
                   return;
                 }
                 if (remarksController.text.isEmpty) {

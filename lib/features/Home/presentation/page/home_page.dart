@@ -1,9 +1,15 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:steel_contractor/Utils/common_widgets/Background/background_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/Loader/WaveLoaderWidget.dart';
 import 'package:steel_contractor/Utils/common_widgets/Routes/routes.dart';
 import 'package:steel_contractor/Utils/common_widgets/app_bar_widget.dart';
+import 'package:steel_contractor/Utils/common_widgets/app_update_message_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/message_box_two_button_pop.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
 import 'package:steel_contractor/features/Home/domain/bloc/home_bloc.dart';
@@ -19,10 +25,37 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    callMethodeChannel();
     BlocProvider.of<HomeBloc>(context).add(HomePageLoadEvent(context: context));
     super.initState();
   }
 
+  static const MethodChannel platform = MethodChannel('steelApprover');
+  callMethodeChannel()  async {
+    try {
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      String applicationId = packageInfo.packageName;
+      String androidPlayStoreUrl =
+          "https://play.google.com/store/apps/details?id=$applicationId&hl=en&gl=US";
+      final dynamic result = await platform.invokeMethod('getAppUpdate');
+      if (Platform.isAndroid) {
+        if (kDebugMode) {
+          print("Upgrade Message ============== $result");
+        }
+        if (result.toString() == "success") {
+          try {
+            AppUpdateMessage.showAlertDialog(
+                context: context, url: androidPlayStoreUrl, isLater: false);
+          } catch (e) {
+            AppUpdateMessage.showAlertDialog(
+                context: context, url: androidPlayStoreUrl);
+          }
+        }
+      }
+    } on PlatformException catch (e) {
+      return false;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
