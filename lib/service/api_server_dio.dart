@@ -21,12 +21,11 @@ class ApiHelper {
       String token = AppConfig.instanceInit()?.loginData.token ?? "";
       String url = Apis.baseUrl + urlEndPoint;
       log("URL --> $url");
+      log("headers --> ${{"Authorization": token}}");
       final response = await Dio().get(
         Uri.parse(url).toString(),
         options: Options(headers: {"Authorization": token}),
       );
-      log("headers --> ${{"Authorization": token}}");
-      log("URL --> $url");
       log("Response Data --> ${response.data}");
       if (response.statusCode == 200) {
         return response.data;

@@ -82,17 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     _logoWidget(),
                     CommonStyle.vertical(context: context),
                     Text(
-                      AppConfig.instanceInit()!.client == Client.purbaBharati
-                          ? 'Purba Bharati Gas Pvt. Ltd'
-                     : AppConfig.instanceInit()!.client == Client.unistal
-                          ? 'Unistal System Pvt. Ltd'
-                          : AppConfig.instanceInit()!.client == Client.oilIndia
-                          ? 'Oil India'
-                          : AppConfig.instanceInit()!.client == Client.vppl
-                          ? 'VPPL System Pvt. Ltd'
-                          : AppConfig.instanceInit()!.client == Client.vrpl
-                          ? 'VRPL System Pvt. Ltd'
-                          : 'Unistal System Pvt. Ltd',
+                      AppIcon.domainName(),
                       style: TextStyle(
                         fontSize: 21,
                         fontWeight: FontWeight.bold,

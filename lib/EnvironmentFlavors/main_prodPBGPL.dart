@@ -7,7 +7,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   var environmentConfig = EnvironmentConfig(
     flavor: EnvironmentFlavor.prodPBGPL,
-    child: Root(client: Client.purbaBharati),
+    child: Root(client: Client.pbgpl),
   );
   runApp(environmentConfig);
 }

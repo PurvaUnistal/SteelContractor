@@ -8,7 +8,7 @@ Future<void> main() async {
 
   var environmentConfig = EnvironmentConfig(
     flavor: EnvironmentFlavor.prodOilIndia,
-    child: Root(client: Client.oilIndia),
+    child: Root(client: Client.hpoil),
   );
   runApp(environmentConfig);
 }

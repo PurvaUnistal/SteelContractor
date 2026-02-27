@@ -7,8 +7,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   var environmentConfig = EnvironmentConfig(
-    flavor: EnvironmentFlavor.prodMGL,
-    child: Root(client: Client.mgl),
+    flavor: EnvironmentFlavor.prodGJPL,
+    child: Root(client: Client.gjpl),
   );
   runApp(environmentConfig);
 }

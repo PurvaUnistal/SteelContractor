@@ -11,6 +11,7 @@ import 'package:steel_contractor/Utils/common_widgets/Routes/routes.dart';
 import 'package:steel_contractor/Utils/common_widgets/app_bar_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/app_update_message_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/res/app_config.dart';
+import 'package:steel_contractor/features/ApproverActivity/presentation/approver_activity_page.dart';
 import 'package:steel_contractor/features/Home/domain/bloc/home_bloc.dart';
 
 import 'logout_widget.dart';
@@ -110,7 +111,11 @@ class _PhoneHomeWidgetState extends State<PhoneHomeWidget> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Routes.getRouteForActivity(data)));
+                        builder: (context) => ApproverActivityPage(data: data,)));
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => Routes.getRouteForActivity(data)));
               },
               title: Text(data.activityName!),
              // leading: Icon(icon[i]),

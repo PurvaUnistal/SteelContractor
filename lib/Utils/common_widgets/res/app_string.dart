@@ -4,12 +4,12 @@ import 'package:steel_contractor/Utils/common_widgets/res/enums.dart';
 class AppString {
 
   static const Map<Client, String> _releaseDates = {
-    Client.mahaNagar: "11-06-2025",
-    Client.purbaBharati: "11-06-2025",
+    Client.mgl: "11-06-2025",
+    Client.pbgpl: "11-06-2025",
     Client.unistal: "11-06-2025",
-    Client.oilIndia: "16-02-2026",
+    Client.hpoil: "16-02-2026",
     Client.vppl: "28-01-2026",
-    Client.vrpl: "17-02-2026",
+    Client.vrpl: "27-02-2026",
   };
 
   static String get version => "Version : 1.0.0 - Steel Contractor-${_releaseDates[AppConfig.instanceInit()!.client] ?? ""}";

@@ -79,7 +79,7 @@ android {
             resValue("string", "app_name", "VRPL Approver")
             manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
             manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
-            versionCode = 1
+            versionCode = 2
             versionName = "1.0.0-VRPL Approver"
             val keystorePropertiesFile = rootProject.file("vrpl.properties")
             if (keystorePropertiesFile.exists()) {
