@@ -113,9 +113,9 @@ android {
             dimension = "version"
             applicationIdSuffix = ".brcpl.steel.approver"
             resValue("string", "app_name", "BRCPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
-            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
-            versionCode = 1
+            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+            versionCode = 2
             versionName = "1.0.0-BRCPL"
             val keystorePropertiesFile = rootProject.file("brcpl.properties")
             if (keystorePropertiesFile.exists()) {
