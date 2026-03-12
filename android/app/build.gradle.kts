@@ -63,6 +63,16 @@ android {
             versionName = "1.0.0-HPOIL Approver"
         }
 
+        create("prodHPOIL") {
+            dimension = "version"
+            applicationIdSuffix = ".hpoil.steel.approver"
+            resValue("string", "app_name", "HP OIL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/hp_oil_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/hp_oil_logo")
+            versionCode = 1
+            versionName = "1.0.0-HPOIL Approver"
+        }
+
         create("prodVPPL") {
             dimension = "version"
             applicationIdSuffix = ".vppl.steel.approver"
@@ -82,6 +92,32 @@ android {
             versionCode = 2
             versionName = "1.0.0-VRPL Approver"
             val keystorePropertiesFile = rootProject.file("vrpl.properties")
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            }
+        }
+        create("prodJDPL") {
+            dimension = "version"
+            applicationIdSuffix = ".jdpl.steel.approver"
+            resValue("string", "app_name", "JDPL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+            versionCode = 1
+            versionName = "1.0.0-JDPL"
+            val keystorePropertiesFile = rootProject.file("jdpl.properties")
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            }
+        }
+        create("prodBRCPL") {
+            dimension = "version"
+            applicationIdSuffix = ".brcpl.steel.approver"
+            resValue("string", "app_name", "BRCPL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
+            versionCode = 1
+            versionName = "1.0.0-BRCPL"
+            val keystorePropertiesFile = rootProject.file("brcpl.properties")
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
             }

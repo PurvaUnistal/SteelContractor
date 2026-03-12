@@ -298,25 +298,26 @@ class _ApproverActivityPageState extends State<ApproverActivityPage> {
                                   CommonStyle.dataCell(
                                     label: user.weather.toString(),
                                   ),
-                                  DataCell(
-                                    user.attachFile!.isNotEmpty
-                                        ? InkWell(
-                                      onTap: () {
-                                        BlocProvider.of<ApproverActivityBloc>(
-                                          context,
-                                        ).add(
-                                          ImageViewEvent(
-                                            url: user.image ?? "",
-                                            context: context,
-                                          ),
-                                        );
-                                      },
-                                      child: Icon(Icons.image, color: EnvironmentConfig.of(context)!.secondaryTheme,),
-                                    )
-                                        :Text("No File",style: TextStyle(
-                                        fontSize: 8
-                                    )),
-                                  ),
+                                  DataCell(tableCellLink(link: user.image ?? "")),
+                                  // DataCell(
+                                  //   user.attachFile!.isNotEmpty
+                                  //       ? InkWell(
+                                  //     onTap: () {
+                                  //       BlocProvider.of<ApproverActivityBloc>(
+                                  //         context,
+                                  //       ).add(
+                                  //         ImageViewEvent(
+                                  //           url: user.image ?? "",
+                                  //           context: context,
+                                  //         ),
+                                  //       );
+                                  //     },
+                                  //     child: Icon(Icons.image, color: EnvironmentConfig.of(context)!.secondaryTheme,),
+                                  //   )
+                                  //       :Text("No File",style: TextStyle(
+                                  //       fontSize: 8
+                                  //   )),
+                                  // ),
                                   CommonStyle.dataCell(
                                     label: user.sectionName.toString(),
                                   ),
@@ -331,5 +332,75 @@ class _ApproverActivityPageState extends State<ApproverActivityPage> {
             ),
           ),
         );
+  }
+
+  Widget tableCellLink({required String link}) {
+    final width = MediaQuery.of(context).size.width * 0.3;
+
+    if (link.trim().isEmpty || link == "-" || link.toLowerCase() == "null") {
+      return SizedBox(
+        width: width,
+        child: const Center(
+          child: Text(
+            "No File",
+            style: TextStyle(fontSize: 10),
+          ),
+        ),
+      );
+    }
+
+    final isPdf = link.toLowerCase().endsWith(".pdf");
+
+    return SizedBox(
+      width: width,
+      child: InkWell(
+        onTap: () {
+          if (isPdf) {
+            BlocProvider.of<ApproverActivityBloc>(context).add(
+              DownloadPdfEvent(
+                url: link,
+                context: context,
+              ),
+            );
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => Scaffold(
+                  appBar: AppBar(title: const Text("Image")),
+                  body: Center(
+                    child: InteractiveViewer(
+                      child: Image.network(
+                        link,
+                        loadingBuilder: (context, child, progress) {
+                          if (progress == null) return child;
+                          return const CircularProgressIndicator();
+                        },
+                        errorBuilder: (context, error, stackTrace) {
+                          return Text(
+                            "No Image URL Found",
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          }
+        },
+        child: isPdf
+            ? Icon(
+          Icons.picture_as_pdf,
+          size: 20,
+          color: EnvironmentConfig.of(context)!.secondaryTheme,
+        )
+            : Icon(
+          Icons.image,
+          size: 20,
+          color: EnvironmentConfig.of(context)!.secondaryTheme,
+        ),
+      ),
+    );
   }
 }

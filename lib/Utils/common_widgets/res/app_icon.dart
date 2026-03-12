@@ -10,7 +10,7 @@ class AppIcon {
         : AppConfig.instanceInit()!.client == Client.unistal
         ? AppIcon.unistalLogo
         : AppConfig.instanceInit()!.client == Client.hpoil
-        ? AppIcon.oilIndiaLogo
+        ? AppIcon.hpOiLogo
         : AppConfig.instanceInit()!.client == Client.vppl
         ? AppIcon.vpplLogo
         : AppConfig.instanceInit()!.client == Client.vrpl
@@ -18,6 +18,8 @@ class AppIcon {
         : AppConfig.instanceInit()!.client == Client.gjpl
         ? AppIcon.vpplLogo
         : AppConfig.instanceInit()!.client == Client.jdpl
+        ? AppIcon.vrplLogo
+        : AppConfig.instanceInit()!.client == Client.brcpl
         ? AppIcon.vrplLogo
         : AppIcon.unistalLogo;
   }
@@ -30,15 +32,17 @@ class AppIcon {
         : AppConfig.instanceInit()!.client == Client.unistal
         ? 'Unistal System Pvt. Ltd'
         : AppConfig.instanceInit()!.client == Client.hpoil
-        ? 'Oil India'
+        ? 'HP Oil'
         : AppConfig.instanceInit()!.client == Client.vppl
-        ? 'VPPL'
+        ? 'VPPL APP'
         : AppConfig.instanceInit()!.client == Client.vrpl
-        ? 'VRPL'
+        ? 'VRPL APP'
         : AppConfig.instanceInit()!.client == Client.gjpl
-        ? 'GJPL'
+        ? 'GJPL APP'
         : AppConfig.instanceInit()!.client == Client.jdpl
-        ? 'JDPL'
+        ? 'JDPL APP'
+        : AppConfig.instanceInit()!.client == Client.brcpl
+        ? 'BRCPL APP'
         : 'Unistal System Pvt. Ltd';
   }
 
@@ -48,6 +52,7 @@ class AppIcon {
   static String unistalLogo = 'assets/logo/unistal_logo.png';
   static String mglLogo = 'assets/logo/mgl_logo.png';
   static String oilIndiaLogo = 'assets/logo/oil_india_logo.png';
+  static String hpOiLogo = 'assets/logo/hp_oil_logo.png';
   static String vpplLogo = 'assets/logo/vppl_plcms.png';
   static String vrplLogo = 'assets/logo/vrpl_plcms.png';
   static String pdfIcon = 'assets/images/pdf_icon.png';
