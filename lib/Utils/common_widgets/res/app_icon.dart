@@ -19,7 +19,7 @@ class AppIcon {
         ? AppIcon.vpplLogo
         : AppConfig.instanceInit()!.client == Client.jdpl
         ? AppIcon.vrplLogo
-        : AppConfig.instanceInit()!.client == Client.brcpl
+        : AppConfig.instanceInit()!.client == Client.bcpl
         ? AppIcon.vrplLogo
         : AppConfig.instanceInit()!.client == Client.agcl
         ? AppIcon.agclBanner
@@ -43,7 +43,7 @@ class AppIcon {
         ? 'GJPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.jdpl
         ? 'JDPL Approver APP'
-        : AppConfig.instanceInit()!.client == Client.brcpl
+        : AppConfig.instanceInit()!.client == Client.bcpl
         ? 'BCPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.agcl
         ? 'AGCL Approver APP'

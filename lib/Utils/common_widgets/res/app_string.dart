@@ -10,7 +10,7 @@ class AppString {
     Client.hpoil: "12-03-2026",
     Client.vppl: "28-01-2026",
     Client.vrpl: "27-02-2026",
-    Client.brcpl: "5-03-2026",
+    Client.bcpl: "5-03-2026",
     Client.jdpl: "5-03-2026",
     Client.agcl: "27-03-2026",
   };

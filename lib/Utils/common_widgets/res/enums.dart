@@ -12,7 +12,7 @@ enum Client {
   vrpl,
   gjpl,
   jdpl,
-  brcpl,
+  bcpl,
 }
 enum EnvironmentFlavor {
   prodAGCL,
@@ -25,5 +25,5 @@ enum EnvironmentFlavor {
   prodVRPL,
   prodGJPL,
   prodJDPL,
-  prodBRCPL,
+  prodBCPL,
 }

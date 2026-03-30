@@ -113,7 +113,7 @@ android {
                 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
             }
         }
-        create("prodBRCPL") {
+        create("prodBCPL") {
             dimension = "version"
             applicationIdSuffix = ".brcpl.steel.approver"
             resValue("string", "app_name", "BCPL Approver")
