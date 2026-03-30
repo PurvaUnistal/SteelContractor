@@ -66,7 +66,7 @@ class _SectionIdPageState extends State<SectionIdPage> {
       child:Scaffold(
         // drawer: PmcSectionHomeDrawerWidget(),
         appBar: AppBarWidget(
-          title:"${AppConfig.instanceInit()?.loginData.user?.role.toString().toUpperCase()} Section Home",
+          title:"Section Home",
           actions: [
             Builder(
               builder: (context) => IconButton(

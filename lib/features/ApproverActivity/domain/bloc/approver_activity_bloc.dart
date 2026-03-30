@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:steel_contractor/Utils/Utils.dart';
@@ -63,7 +62,14 @@ class ApproverActivityBloc
     tpiValue = TpiModel();
     listOfTpi = [];
     await fetchReportActivity(context: event.context);
-    listOfTpi =  (await HomeHelper.tpiApi(context: event.context))??[];
+    AppConfig.instanceInit()!.client == Client.pbgpl
+        || AppConfig.instanceInit()!.client == Client.mgl
+        || AppConfig.instanceInit()!.client == Client.vppl
+        || AppConfig.instanceInit()!.client == Client.gjpl
+        || AppConfig.instanceInit()!.client == Client.hpoil
+        || AppConfig.instanceInit()!.client == Client.agcl
+    ?  SizedBox.shrink()
+   : listOfTpi =  (await HomeHelper.tpiApi(context: event.context))??[];
     _eventCompleted(emit);
   }
 
@@ -157,13 +163,24 @@ class ApproverActivityBloc
   void _openConfirmationDialog({
     required BuildContext context,
     required String status,
-    required bool showDropdown,
   }) {
     remarksController.clear();
     tpiValue = TpiModel();
     isBtnLoader = false;
-    final roleType = AppConfig.instanceInit()?.loginData.user!.role.toString().toLowerCase();
-    final bool shouldShowDropdown = roleType == "client"  ? false : showDropdown;
+    final config = AppConfig.instanceInit();
+    final client = config?.client;
+    final roleType = config?.loginData.user?.role?.toLowerCase();
+
+    final hideForClient = client == Client.pbgpl
+        || client == Client.mgl
+        || client == Client.vppl
+        || client == Client.gjpl
+        || client == Client.hpoil
+        || client == Client.agcl;
+
+
+    final bool shouldShowRemark = status == "1" && hideForClient == true  ? false : true;
+
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -172,8 +189,9 @@ class ApproverActivityBloc
           builder: (context, setState) {
             return ConfirmationDialog(
               title: "Confirm?",
+              status: status,
               message: "Are you sure you want to ${status == "1" ? "approve" : "reject"}?",
-              showDropdown: shouldShowDropdown,
+             // showDropdown: shouldShowDropdown,
               remarksController: remarksController,
               isBtnLoading: isBtnLoader,
               dropdownValue: tpiValue,
@@ -182,16 +200,18 @@ class ApproverActivityBloc
                 Navigator.pop(dialogContext);
               },
               onConfirm: () async {
-                if (shouldShowDropdown  && tpiValue.iD == null) {
-                  String msg = roleType == "tpi"
-                      ? "PMC is required"
-                      : roleType == "pmc"
-                      ? "Client is required"
-                      : "TPI is required";
-                  Utils.errorSnackBar(msg: msg, context: context,);
+                if (hideForClient == false && tpiValue.iD == null) {
+                  if(roleType != "client"){
+                    String msg = roleType == "tpi"
+                        ? "PMC is required"
+                        : roleType == "pmc"
+                        ? "Client is required"
+                        : "TPI is required";
+                    Utils.errorSnackBar(msg: msg, context: context,);
+                  }
                   return;
                 }
-                if (remarksController.text.isEmpty) {
+                if (remarksController.text.isEmpty && shouldShowRemark == true) {
                   Utils.errorSnackBar(
                     msg: "Remarks required",
                     context: context,
@@ -223,7 +243,6 @@ class ApproverActivityBloc
     _openConfirmationDialog(
       context: event.context,
       status: "1",
-      showDropdown: true,
     );
   }
 
@@ -231,7 +250,6 @@ class ApproverActivityBloc
     _openConfirmationDialog(
       context: event.context,
       status: "2",
-      showDropdown: false,
     );
   }
 

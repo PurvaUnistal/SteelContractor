@@ -21,6 +21,8 @@ class AppIcon {
         ? AppIcon.vrplLogo
         : AppConfig.instanceInit()!.client == Client.brcpl
         ? AppIcon.vrplLogo
+        : AppConfig.instanceInit()!.client == Client.agcl
+        ? AppIcon.agclBanner
         : AppIcon.unistalLogo;
   }
 
@@ -32,21 +34,24 @@ class AppIcon {
         : AppConfig.instanceInit()!.client == Client.unistal
         ? 'Unistal System Pvt. Ltd'
         : AppConfig.instanceInit()!.client == Client.hpoil
-        ? 'HP Oil'
+        ? 'HPOIL Approver APP'
         : AppConfig.instanceInit()!.client == Client.vppl
-        ? 'VPPL APP'
+        ? 'VPPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.vrpl
-        ? 'VRPL APP'
+        ? 'VRPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.gjpl
-        ? 'GJPL APP'
+        ? 'GJPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.jdpl
-        ? 'JDPL APP'
+        ? 'JDPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.brcpl
-        ? 'BRCPL APP'
+        ? 'BCPL Approver APP'
+        : AppConfig.instanceInit()!.client == Client.agcl
+        ? 'AGCL Approver APP'
         : 'Unistal System Pvt. Ltd';
   }
 
   static String agclLogo = 'assets/logo/agcl_logo.png';
+  static String agclBanner = 'assets/logo/agcl_banner.png';
   static String agclIcon = 'assets/logo/agcl_icon.png';
   static String pbgLogo = 'assets/logo/pbgpl_logo.png';
   static String unistalLogo = 'assets/logo/unistal_logo.png';

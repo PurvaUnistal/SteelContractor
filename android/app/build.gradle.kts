@@ -66,11 +66,15 @@ android {
         create("prodHPOIL") {
             dimension = "version"
             applicationIdSuffix = ".hpoil.steel.approver"
-            resValue("string", "app_name", "HP OIL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/hp_oil_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/hp_oil_logo")
+            resValue("string", "app_name", "HPOIL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
             versionCode = 1
-            versionName = "1.0.0-HPOIL Approver"
+            versionName = "1.0.0-HPOIL"
+            val keystorePropertiesFile = rootProject.file("hpoil.properties")
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            }
         }
 
         create("prodVPPL") {
@@ -102,7 +106,7 @@ android {
             resValue("string", "app_name", "JDPL Approver")
             manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
             manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-            versionCode = 1
+            versionCode = 2
             versionName = "1.0.0-JDPL"
             val keystorePropertiesFile = rootProject.file("jdpl.properties")
             if (keystorePropertiesFile.exists()) {
@@ -112,15 +116,25 @@ android {
         create("prodBRCPL") {
             dimension = "version"
             applicationIdSuffix = ".brcpl.steel.approver"
-            resValue("string", "app_name", "BRCPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-            versionCode = 2
-            versionName = "1.0.0-BRCPL"
+            resValue("string", "app_name", "BCPL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
+            versionCode = 5
+            versionName = "1.0.0-BCPL"
             val keystorePropertiesFile = rootProject.file("brcpl.properties")
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
             }
+        }
+
+        create("prodAGCL") {
+            dimension = "version"
+            applicationIdSuffix = ".agcl.steel.approver"
+            resValue("string", "app_name", "AGCL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/agcl_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/agcl_logo")
+            versionCode = 1
+            versionName = "1.0.0-AGCL"
         }
 
     }
@@ -144,10 +158,9 @@ android {
     }
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
             signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }
