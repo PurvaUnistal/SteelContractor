@@ -23,6 +23,8 @@ class AppIcon {
         ? AppIcon.vrplLogo
         : AppConfig.instanceInit()!.client == Client.agcl
         ? AppIcon.agclBanner
+        : AppConfig.instanceInit()!.client == Client.dbpl
+        ? AppIcon.vrplLogo
         : AppIcon.unistalLogo;
   }
 
@@ -47,6 +49,8 @@ class AppIcon {
         ? 'BCPL Approver APP'
         : AppConfig.instanceInit()!.client == Client.agcl
         ? 'AGCL Approver APP'
+        : AppConfig.instanceInit()!.client == Client.dbpl
+        ? 'DBPL Approver APP'
         : 'Unistal System Pvt. Ltd';
   }
 

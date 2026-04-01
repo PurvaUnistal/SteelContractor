@@ -109,10 +109,6 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => ApproverActivityPage(data: data,)));
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //         builder: (context) => Routes.getRouteForActivity(data)));
                 },
                 title: Text(data.activityName!),
                 // leading: Icon(icon[i]),

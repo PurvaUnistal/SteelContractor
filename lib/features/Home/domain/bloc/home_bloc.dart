@@ -7,10 +7,8 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  List<ActivitySectionData> _listActivityData = [];
-  List<ActivitySectionData> get listActivityData => _listActivityData;
-  List<ActivitySectionData> _listFilterActivityData = [];
-  List<ActivitySectionData> get listFilterActivityData => _listFilterActivityData;
+  List<ActivitySectionData> listActivityData = [];
+
 
   HomeBloc() : super(HomeInitial()) {
     on<HomePageLoadEvent>(_pageLoad);
@@ -18,9 +16,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   _pageLoad(HomePageLoadEvent event, emit) async {
     emit(HomePageLoadState());
-    _listActivityData = [];
-    _listFilterActivityData = [];
-    _listActivityData =  (await HomeHelper.activityBySectionApi(context: event.context))!;
+    listActivityData = [];
+    final filteredList =  (await HomeHelper.activityBySectionApi(context: event.context))!;
+    listActivityData = filteredList.where((data) {
+      return data.modelName != null &&
+          data.modelName.toString().trim().isNotEmpty &&
+          data.modelName != "0";
+    }).toList();
     _eventCompleted(emit);
   }
 

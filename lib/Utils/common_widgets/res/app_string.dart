@@ -8,11 +8,13 @@ class AppString {
     Client.pbgpl: "11-06-2025",
     Client.unistal: "11-06-2025",
     Client.hpoil: "12-03-2026",
-    Client.vppl: "28-01-2026",
+    Client.vppl: "01-04-2026",
     Client.vrpl: "27-02-2026",
     Client.bcpl: "5-03-2026",
     Client.jdpl: "5-03-2026",
     Client.agcl: "27-03-2026",
+    Client.gjpl:  "01-04-2026",
+    Client.dbpl:  "01-04-2026",
   };
 
   static String get version => "Version : 1.0.0 - Steel Contractor-${_releaseDates[AppConfig.instanceInit()!.client] ?? ""}";

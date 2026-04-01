@@ -42,6 +42,8 @@ class EnvironmentConfig extends InheritedWidget {
         return "https://jdpl.plcms.net/api/";
       case EnvironmentFlavor.prodBCPL:
         return "https://bcpl.plcms.net/api/";
+      case EnvironmentFlavor.prodDBPL:
+        return "https://dbpl.plcms.net/api/";
     }
   }
 
@@ -69,6 +71,8 @@ class EnvironmentConfig extends InheritedWidget {
         return Colors.amber.shade400;
       case EnvironmentFlavor.prodBCPL:
         return Colors.amber.shade400;
+      case EnvironmentFlavor.prodDBPL:
+        return Color(0xFFF5C400);
     }
   }
 
@@ -96,6 +100,8 @@ class EnvironmentConfig extends InheritedWidget {
         return Colors.amber.shade400;
       case EnvironmentFlavor.prodBCPL:
         return Colors.amber.shade400;
+      case EnvironmentFlavor.prodDBPL:
+        return Color(0xFF1E1E1E);
     }
   }
 }
