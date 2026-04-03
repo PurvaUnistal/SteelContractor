@@ -54,10 +54,10 @@ dev_dependencies:
     sdk: flutter
 
 flutter_icons:
-  android: "unistal_logo"
+  android: "vrpl_plcms"
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/logo/unistal_logo.png"
+  image_path: "assets/logo/vrpl_plcms.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
