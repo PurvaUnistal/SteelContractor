@@ -44,6 +44,10 @@ class EnvironmentConfig extends InheritedWidget {
         return "https://bcpl.plcms.net/api/";
       case EnvironmentFlavor.prodDBPL:
         return "https://dbpl.plcms.net/api/";
+      case EnvironmentFlavor.prodPJPL:
+        return "https://pjpl.plcms.net/api/";
+      case EnvironmentFlavor.prodUrjagati:
+        return "https://urjagati.smartgasnet.com/api/";
     }
   }
 
@@ -73,6 +77,10 @@ class EnvironmentConfig extends InheritedWidget {
         return Colors.amber.shade400;
       case EnvironmentFlavor.prodDBPL:
         return Color(0xFFF5C400);
+      case EnvironmentFlavor.prodPJPL:
+        return Color(0xFFE04A1F);
+      case EnvironmentFlavor.prodUrjagati:
+        return Colors.blue.shade800;
     }
   }
 
@@ -102,6 +110,10 @@ class EnvironmentConfig extends InheritedWidget {
         return Colors.amber.shade400;
       case EnvironmentFlavor.prodDBPL:
         return Color(0xFF1E1E1E);
+      case EnvironmentFlavor.prodPJPL:
+        return Color(0xFFE04A1F);
+      case EnvironmentFlavor.prodUrjagati:
+        return Colors.orange.shade800;
     }
   }
 }

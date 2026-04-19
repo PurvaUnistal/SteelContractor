@@ -25,6 +25,10 @@ class AppIcon {
         ? AppIcon.agclBanner
         : AppConfig.instanceInit()!.client == Client.dbpl
         ? AppIcon.vrplLogo
+        : AppConfig.instanceInit()!.client == Client.pgpl
+        ? AppIcon.pjplLogo
+        : AppConfig.instanceInit()!.client == Client.urjagati
+        ? AppIcon.urjagatiLogo
         : AppIcon.unistalLogo;
   }
 
@@ -51,6 +55,10 @@ class AppIcon {
         ? 'AGCL Approver APP'
         : AppConfig.instanceInit()!.client == Client.dbpl
         ? 'DBPL Approver APP'
+        : AppConfig.instanceInit()!.client == Client.pgpl
+        ? 'PJPL Approver APP'
+        : AppConfig.instanceInit()!.client == Client.urjagati
+        ? 'Urjagati Approver APP'
         : 'Unistal System Pvt. Ltd';
   }
 
@@ -64,5 +72,7 @@ class AppIcon {
   static String hpOiLogo = 'assets/logo/hp_oil_logo.png';
   static String vpplLogo = 'assets/logo/vppl_plcms.png';
   static String vrplLogo = 'assets/logo/vrpl_plcms.png';
+  static String pjplLogo = 'assets/logo/pjpl_logo.png';
+  static String urjagatiLogo = 'assets/logo/urjagati_logo.png';
   static String pdfIcon = 'assets/images/pdf_icon.png';
 }

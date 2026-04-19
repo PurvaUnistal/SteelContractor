@@ -68,9 +68,11 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
     final password = await SharedPref.getString(key: PrefsValue.passwordVal);
     final PackageInfo packageInfo = await PackageInfo.fromPlatform();
     final newVersion = await packageInfo.buildNumber;
-    AppConfig.instanceInit()?.setBuildNumber(
-      buildNumber: packageInfo.buildNumber,
-    );
+    String version = packageInfo.version;
+    String buildNumber = packageInfo.buildNumber;
+    String appName = packageInfo.appName;
+    print("packageName-->  ${packageInfo.packageName} $appName");
+    AppConfig.instanceInit()?.setBuildNumber(buildNumber: "$buildNumber($version)",);
     final oldVersion = await SharedPref.getString(key: PrefsValue.buildNumber);
     Timer(const Duration(seconds: 3), () async {
       if (oldVersion == newVersion) {

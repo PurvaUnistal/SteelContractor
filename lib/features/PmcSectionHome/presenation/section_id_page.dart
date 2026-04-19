@@ -101,7 +101,7 @@ class _SectionIdPageState extends State<SectionIdPage> {
       itemCount: dataState.listOfSectionId.length,
       itemBuilder: (BuildContext context, int i) {
         final data = dataState.listOfSectionId[i];
-          return Padding(
+          return data.sectionName!.isNotEmpty ? Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2),
             child: Card(
               child: ListTile(
@@ -117,7 +117,7 @@ class _SectionIdPageState extends State<SectionIdPage> {
                 title: Text(data.sectionName ?? "No Section Name"),
               ),
             ),
-          );
+          ) : SizedBox.shrink();
 
       },
     );

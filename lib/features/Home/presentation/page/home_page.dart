@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:steel_contractor/Utils/common_widgets/Background/background_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/Loader/WaveLoaderWidget.dart';
-import 'package:steel_contractor/Utils/common_widgets/Routes/routes.dart';
 import 'package:steel_contractor/Utils/common_widgets/app_bar_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/app_update_message_widget.dart';
 import 'package:steel_contractor/Utils/common_widgets/message_box_two_button_pop.dart';
@@ -26,37 +25,49 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
-    callMethodeChannel();
+    checkForUpdate();
     BlocProvider.of<HomeBloc>(context).add(HomePageLoadEvent(context: context));
     super.initState();
   }
 
   static const MethodChannel platform = MethodChannel('steelApprover');
-  callMethodeChannel()  async {
+
+
+
+  Future<void> checkForUpdate() async {
     try {
+      final result = await platform.invokeMethod('getAppUpdate');
+
+      if (result == null) return;
+
+      final Map<dynamic, dynamic> data = result;
+
+      final bool updateAvailable = data['update'] ?? false;
+
+      if (!updateAvailable) return;
+
       PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      String applicationId = packageInfo.packageName;
-      String androidPlayStoreUrl =
-          "https://play.google.com/store/apps/details?id=$applicationId&hl=en&gl=US";
-      final dynamic result = await platform.invokeMethod('getAppUpdate');
+      String packageName = packageInfo.packageName;
+
+      String url = "";
       if (Platform.isAndroid) {
-        if (kDebugMode) {
-          print("Upgrade Message ============== $result");
-        }
-        if (result.toString() == "success") {
-          try {
-            AppUpdateMessage.showAlertDialog(
-                context: context, url: androidPlayStoreUrl, isLater: false);
-          } catch (e) {
-            AppUpdateMessage.showAlertDialog(
-                context: context, url: androidPlayStoreUrl);
-          }
-        }
+        url = "https://play.google.com/store/apps/details?id=$packageName";
+      } else if (Platform.isIOS) {
+        String appId = data['appId'].toString();
+        url = "https://apps.apple.com/app/id$appId";
       }
+
+      AppUpdateMessage.showAlertDialog(
+        context: context,
+        url: url,
+        isLater: false,
+      );
+
     } on PlatformException catch (e) {
-      return false;
+      debugPrint("PlatformException: ${e.message}");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

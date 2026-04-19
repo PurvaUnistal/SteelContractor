@@ -81,13 +81,13 @@ android {
             dimension = "version"
             applicationIdSuffix = ".vppl.steel.approver"
             resValue("string", "app_name", "VPPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIcon", "@mipmap/vppl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vppl_plcms")
             val keystorePropertiesFile = rootProject.file("vppl.properties")
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
             }
-            versionCode = 1
+            versionCode = 2
             versionName = "1.0.0-VPPL"
         }
 
@@ -97,26 +97,26 @@ android {
 //            resValue("string", "app_name", "VRPL Approver")
 //            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
 //            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
-//            versionCode = 2
-//            versionName = "1.0.0-VRPL Approver"
+//            versionCode = 3
+//            versionName = "1.0.0-VRPL"
 //            val keystorePropertiesFile = rootProject.file("vrpl.properties")
 //            if (keystorePropertiesFile.exists()) {
 //                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 //            }
 //        }
-        create("prodGJPL") {
-            dimension = "version"
-            applicationIdSuffix = ".gjpl.steel.approver"
-            resValue("string", "app_name", "GJPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-            versionCode = 1
-            versionName = "1.0.0-GJPL"
-            val keystorePropertiesFile = rootProject.file("gjpl.properties")
-            if (keystorePropertiesFile.exists()) {
-                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-            }
-        }
+//        create("prodGJPL") {
+//            dimension = "version"
+//            applicationIdSuffix = ".gjpl.steel.approver"
+//            resValue("string", "app_name", "GJPL Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+//            versionCode = 1
+//            versionName = "1.0.0-GJPL"
+//            val keystorePropertiesFile = rootProject.file("gjpl.properties")
+//            if (keystorePropertiesFile.exists()) {
+//                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+//            }
+//        }
 //        create("prodJDPL") {
 //            dimension = "version"
 //            applicationIdSuffix = ".jdpl.steel.approver"
@@ -136,36 +136,65 @@ android {
 //            resValue("string", "app_name", "BCPL Approver")
 //            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
 //            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
-//            versionCode = 5
+//            versionCode = 6
 //            versionName = "1.0.0-BCPL"
 //            val keystorePropertiesFile = rootProject.file("brcpl.properties")
 //            if (keystorePropertiesFile.exists()) {
 //                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 //            }
 //        }
+//
+//        create("prodAGCL") {
+//            dimension = "version"
+//            applicationIdSuffix = ".agcl.steel.approver"
+//            resValue("string", "app_name", "AGCL Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/agcl_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/agcl_logo")
+//            versionCode = 1
+//            versionName = "1.0.0-AGCL"
+//        }
+//
+//        create("prodDBPL") {
+//            dimension = "version"
+//            applicationIdSuffix = ".dbpl.steel.approver"
+//            resValue("string", "app_name", "DBPL Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+//            val keystorePropertiesFile = rootProject.file("dbpl.properties")
+//            if (keystorePropertiesFile.exists()) {
+//                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+//            }
+//            versionCode = 2
+//            versionName = "1.0.0-DBPL"
+//        }
+//
+//        create("prodPJPL") {
+//            dimension = "version"
+//            applicationIdSuffix = ".pjpl.steel.approver"
+//            resValue("string", "app_name", "PJPL Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+//            val keystorePropertiesFile = rootProject.file("pjpl.properties")
+//            if (keystorePropertiesFile.exists()) {
+//                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+//            }
+//            versionCode = 1
+//            versionName = "1.0.0-PJPL"
+//        }
+//        create("prodUrjagati") {
+//            dimension = "version"
+//            applicationIdSuffix = ".urjagati.steel.approver"
+//            resValue("string", "app_name", "Urjagati Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+////            val keystorePropertiesFile = rootProject.file("pjpl.properties")
+////            if (keystorePropertiesFile.exists()) {
+////                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+////            }
+//            versionCode = 1
+//            versionName = "1.0.0-Urjagati"
+//        }
 
-        create("prodAGCL") {
-            dimension = "version"
-            applicationIdSuffix = ".agcl.steel.approver"
-            resValue("string", "app_name", "AGCL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/agcl_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/agcl_logo")
-            versionCode = 1
-            versionName = "1.0.0-AGCL"
-        }
-        create("prodDBPL") {
-            dimension = "version"
-            applicationIdSuffix = ".dbpl.steel.approver"
-            resValue("string", "app_name", "DBPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-            val keystorePropertiesFile = rootProject.file("dbpl.properties")
-            if (keystorePropertiesFile.exists()) {
-                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-            }
-            versionCode = 1
-            versionName = "1.0.0-DBPL"
-        }
 
     }
 
