@@ -67,9 +67,9 @@ android {
             dimension = "version"
             applicationIdSuffix = ".hpoil.steel.approver"
             resValue("string", "app_name", "HPOIL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-            versionCode = 1
+            manifestPlaceholders.put("appIcon", "@mipmap/hp_oil_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/hp_oil_logo")
+            versionCode = 2
             versionName = "1.0.0-HPOIL"
             val keystorePropertiesFile = rootProject.file("hpoil.properties")
             if (keystorePropertiesFile.exists()) {
@@ -87,7 +87,7 @@ android {
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
             }
-            versionCode = 2
+            versionCode = 3
             versionName = "1.0.0-VPPL"
         }
 
@@ -108,9 +108,9 @@ android {
 //            dimension = "version"
 //            applicationIdSuffix = ".gjpl.steel.approver"
 //            resValue("string", "app_name", "GJPL Approver")
-//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-//            versionCode = 1
+//            manifestPlaceholders.put("appIcon", "@mipmap/vppl_plcms")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/vppl_plcms")
+//            versionCode = 2
 //            versionName = "1.0.0-GJPL"
 //            val keystorePropertiesFile = rootProject.file("gjpl.properties")
 //            if (keystorePropertiesFile.exists()) {
@@ -121,9 +121,9 @@ android {
 //            dimension = "version"
 //            applicationIdSuffix = ".jdpl.steel.approver"
 //            resValue("string", "app_name", "JDPL Approver")
-//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-//            versionCode = 2
+//            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
+//            versionCode = 3
 //            versionName = "1.0.0-JDPL"
 //            val keystorePropertiesFile = rootProject.file("jdpl.properties")
 //            if (keystorePropertiesFile.exists()) {
@@ -172,13 +172,13 @@ android {
 //            dimension = "version"
 //            applicationIdSuffix = ".pjpl.steel.approver"
 //            resValue("string", "app_name", "PJPL Approver")
-//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+//            manifestPlaceholders.put("appIcon", "@mipmap/pjpl_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/pjpl_logo")
 //            val keystorePropertiesFile = rootProject.file("pjpl.properties")
 //            if (keystorePropertiesFile.exists()) {
 //                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 //            }
-//            versionCode = 1
+//            versionCode = 2
 //            versionName = "1.0.0-PJPL"
 //        }
 //        create("prodUrjagati") {
@@ -200,10 +200,7 @@ android {
 
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "unistal"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24
         targetSdk = 36
     }

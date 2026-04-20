@@ -64,7 +64,7 @@ class ApproverActivityBloc
     await fetchReportActivity(context: event.context);
     AppConfig.instanceInit()!.client == Client.pbgpl
         || AppConfig.instanceInit()!.client == Client.mgl
-        || AppConfig.instanceInit()!.client == Client.vppl
+       // || AppConfig.instanceInit()!.client == Client.vppl
         || AppConfig.instanceInit()!.client == Client.gjpl
         || AppConfig.instanceInit()!.client == Client.hpoil
         || AppConfig.instanceInit()!.client == Client.agcl
