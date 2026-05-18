@@ -91,19 +91,19 @@ android {
 //            versionName = "1.0.0-VPPL"
 //        }
 
-        create("prodVRPL") {
-            dimension = "version"
-            applicationIdSuffix = ".vrpl.steel.approver"
-            resValue("string", "app_name", "VRPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
-            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
-            versionCode = 3
-            versionName = "1.0.0-VRPL"
-            val keystorePropertiesFile = rootProject.file("vrpl.properties")
-            if (keystorePropertiesFile.exists()) {
-                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-            }
-        }
+//        create("prodVRPL") {
+//            dimension = "version"
+//            applicationIdSuffix = ".vrpl.steel.approver"
+//            resValue("string", "app_name", "VRPL Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
+//            versionCode = 3
+//            versionName = "1.0.0-VRPL"
+//            val keystorePropertiesFile = rootProject.file("vrpl.properties")
+//            if (keystorePropertiesFile.exists()) {
+//                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+//            }
+//        }
 //        create("prodGJPL") {
 //            dimension = "version"
 //            applicationIdSuffix = ".gjpl.steel.approver"
@@ -130,19 +130,19 @@ android {
 //                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 //            }
 //        }
-//        create("prodBCPL") {
-//            dimension = "version"
-//            applicationIdSuffix = ".brcpl.steel.approver"
-//            resValue("string", "app_name", "BCPL Approver")
-//            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
-//            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
-//            versionCode = 5
-//            versionName = "1.0.0-BCPL"
-//            val keystorePropertiesFile = rootProject.file("brcpl.properties")
-//            if (keystorePropertiesFile.exists()) {
-//                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-//            }
-//        }
+        create("prodBCPL") {
+            dimension = "version"
+            applicationIdSuffix = ".brcpl.steel.approver"
+            resValue("string", "app_name", "BCPL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
+            versionCode = 1
+            versionName = "1.0.0-BCPL"
+            val keystorePropertiesFile = rootProject.file("brcpl.properties")
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            }
+        }
 //
 //        create("prodAGCL") {
 //            dimension = "version"
