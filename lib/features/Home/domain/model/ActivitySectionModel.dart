@@ -47,6 +47,10 @@ class ActivitySectionData {
   String? scope;
   String? startDate;
   String? endDate;
+  dynamic total;
+  dynamic done;
+  dynamic rejected;
+  dynamic balance;
 
   ActivitySectionData(
       {this.sortOrder,
@@ -67,7 +71,12 @@ class ActivitySectionData {
         this.updatedAt,
         this.scope,
         this.startDate,
-        this.endDate});
+        this.endDate,
+        this.total,
+        this.done,
+        this.rejected,
+        this.balance,
+      });
 
   ActivitySectionData.fromJson(Map<String, dynamic> json) {
     activityType = json['activity_type'];
@@ -89,6 +98,10 @@ class ActivitySectionData {
     scope = json['scope'];
     startDate = json['start_date'];
     endDate = json['end_date'];
+    total = json['total'];
+    done = json['done'];
+    rejected = json['rejected'];
+    balance = json['balance'];
   }
 
   Map<String, dynamic> toJson() {
@@ -112,6 +125,10 @@ class ActivitySectionData {
     data['scope'] = this.scope;
     data['start_date'] = this.startDate;
     data['end_date'] = this.endDate;
+    data['total'] = this.total;
+    data['done'] = this.done;
+    data['rejected'] = this.rejected;
+    data['balance'] = this.balance;
     return data;
   }
 }

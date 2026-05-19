@@ -46,6 +46,16 @@ class ApproverActivityBloc
   TpiModel tpiValue = TpiModel();
   List<TpiModel> listOfTpi = [];
 
+  bool get _isTpiExcludedClient {
+    final c = AppConfig.instanceInit()!.client;
+    return c == Client.pbgpl
+     //   || c == Client.vrpl
+        || c == Client.mgl
+        || c == Client.gjpl
+        || c == Client.hpoil
+        || c == Client.agcl;
+  }
+
   _pageLoad(ApproverActivityPageLoadEvent event, emit) async {
     emit(ApproverActivityPageLoadState());
     isLoader = false;
@@ -61,15 +71,12 @@ class ApproverActivityBloc
     isAllSelected = false;
     tpiValue = TpiModel();
     listOfTpi = [];
+    final roleType = AppConfig.instanceInit()?.loginData.user!.role.toString().toLowerCase();
+    print("roleType--> ${roleType}");
     await fetchReportActivity(context: event.context);
-    AppConfig.instanceInit()!.client == Client.pbgpl
-        || AppConfig.instanceInit()!.client == Client.mgl
-       // || AppConfig.instanceInit()!.client == Client.vppl
-        || AppConfig.instanceInit()!.client == Client.gjpl
-        || AppConfig.instanceInit()!.client == Client.hpoil
-        || AppConfig.instanceInit()!.client == Client.agcl
-    ?  SizedBox.shrink()
-   : listOfTpi =  (await HomeHelper.tpiApi(context: event.context))??[];
+    if (!_isTpiExcludedClient) {
+      listOfTpi = (await HomeHelper.tpiApi(context: event.context)) ?? [];
+    }
     _eventCompleted(emit);
   }
 
@@ -169,7 +176,12 @@ class ApproverActivityBloc
     tpiValue = TpiModel();
     isBtnLoader = false;
     final roleType = AppConfig.instanceInit()?.loginData.user!.role.toString().toLowerCase();
-    final bool shouldShowDropdown = roleType == "client" ? false : showDropdown;
+    print("roleType--> ${roleType}");
+    final bool shouldShowDropdown = _isTpiExcludedClient
+        ? false
+        : roleType == "client" || roleType == "pmc"
+        ? false
+        : showDropdown;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -184,7 +196,7 @@ class ApproverActivityBloc
               isBtnLoading: isBtnLoader,
               dropdownValue: tpiValue,
               items: listOfTpi,
-              onChanged: showDropdown
+              onChanged: shouldShowDropdown
                   ? (val) {
                 setState(() {
                   tpiValue = val!;
