@@ -53,6 +53,7 @@ class ApproverActivityBloc
         || c == Client.mgl
         || c == Client.gjpl
         || c == Client.hpoil
+        || c == Client.urjagati
         || c == Client.agcl;
   }
 
@@ -179,7 +180,8 @@ class ApproverActivityBloc
     print("roleType--> ${roleType}");
     final bool shouldShowDropdown = _isTpiExcludedClient
         ? false
-        : roleType == "client" || roleType == "pmc"
+       // : roleType == "client" || roleType == "pmc"
+        : roleType == "client"
         ? false
         : showDropdown;
     showDialog(
@@ -212,6 +214,8 @@ class ApproverActivityBloc
                       ? "PMC is required"
                       : roleType == "pmc"
                       ? "Client is required"
+                      : roleType == "steel contractor"
+                      ? "PMC is required"
                       : "TPI is required";
                   Utils.errorSnackBar(msg: msg, context: context,);
                   return;

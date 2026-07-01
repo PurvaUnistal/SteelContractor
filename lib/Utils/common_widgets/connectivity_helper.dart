@@ -1,15 +1,23 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:steel_contractor/Utils/common_widgets/internet_connectivity_pop_widget.dart';
+
 class ConnectivityHelper {
 
-  static Future<dynamic> allConnectivityCheck({required BuildContext context}) async {
-    bool isConnected =  await checkInterNetConnect();
-    if(isConnected == false){
-      if(!context.mounted) return;
-      showDialog(
-          context: context,
-          builder: (BuildContext context) =>  const InternetConnectivityPopWidget());
+  static Future<dynamic> allConnectivityCheck({
+    required BuildContext context,
+    VoidCallback? onRetry,
+  }) async {
+    bool isConnected = await checkInterNetConnect();
+    if (isConnected == false) {
+      if (!context.mounted) return false;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => InternetConnectivityPopWidget(onRetry: onRetry),
+        ),
+      );
       return false;
     }
     return true;

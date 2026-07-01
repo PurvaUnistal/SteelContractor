@@ -69,11 +69,15 @@ class ConfirmationDialog extends StatelessWidget {
                       ? "Select PMC"
                       : roleType != null && roleType.toLowerCase().toString() == "pmc"
                       ? "Select Client"
+                      :roleType != null && roleType.toLowerCase().toString() == "steel contractor"
+                      ? "Select PMC"
                       :  "Select TPI",
                   label: roleType != null && roleType.toLowerCase().toString() == "tpi"
                       ? "Select PMC"
                       : roleType != null && roleType.toLowerCase().toString() == "pmc"
                       ? "Select Client"
+                      :roleType != null && roleType.toLowerCase().toString() == "steel contractor"
+                      ? "Select PMC"
                       :  "Select TPI",
                   dropdownValue:
                   dropdownValue!.iD == null ? null : dropdownValue,

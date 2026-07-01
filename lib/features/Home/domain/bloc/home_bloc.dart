@@ -17,11 +17,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   _pageLoad(HomePageLoadEvent event, emit) async {
     emit(HomePageLoadState());
     listActivityData = [];
-    final filteredList =  (await HomeHelper.activityBySectionApi(context: event.context))!;
+    final filteredList = (await HomeHelper.activityBySectionApi(context: event.context))!;
+
+    final seen = <String>{};
+
     listActivityData = filteredList.where((data) {
-      return data.modelName != null &&
-          data.modelName.toString().trim().isNotEmpty &&
-          data.modelName != "0";
+      final name = data.modelName?.toString().trim() ?? '';
+      if (name.isEmpty || name == '0') return false;
+      return seen.add(name); // returns false if already present
     }).toList();
     _eventCompleted(emit);
   }

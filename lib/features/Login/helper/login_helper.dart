@@ -65,11 +65,11 @@ class LoginHelper {
       );
       if (res != null && res["error"] == false) {
         if (
-        res["user"]["role"] == "contractor"
-            || res["user"]["role"] =="pmc"
-            || res["user"]["role"] == "client"
-            || res["user"]["role"] == "tpi"
-            || res["user"]["role"] == "steel contractor"
+        res["user"]["role"].toString().toLowerCase() == "contractor"
+            || res["user"]["role"].toString().toLowerCase() =="pmc"
+            || res["user"]["role"].toString().toLowerCase() == "client"
+            || res["user"]["role"].toString().toLowerCase() == "tpi"
+            || res["user"]["role"].toString().toLowerCase() == "steel contractor"
         ) {
           await Utils.successSnackBar(msg: res["messages"], context: context);
           String baseUrl = Apis.loginUrl.replaceAll("api/auth", "");

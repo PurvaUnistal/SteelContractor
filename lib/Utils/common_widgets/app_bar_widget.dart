@@ -29,8 +29,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       automaticallyImplyLeading: false,  // always off — we manage leading manually
       iconTheme: IconThemeData(color: AppColor.white),
+     // iconTheme: IconThemeData(color: EnvironmentConfig.of(context)!.primaryTheme),
       flexibleSpace: Container(
         decoration: BoxDecoration(
+        //  color: AppColor.surface,
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
             end: Alignment.centerRight,
@@ -42,10 +44,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         ),
       ),
       elevation: 0,
-      // ── Leading: show back button only when boolLeading == true ──────────────
       leading: showBack
           ? AppBarBtn(
-        icon: Icons.arrow_back_ios_rounded,   // ‹ classic iOS chevron
+        icon: Icons.arrow_back_ios_rounded,
         onTap: () => Navigator.maybePop(context),
       )
           : const SizedBox.shrink(),
@@ -79,7 +80,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           Flexible(
             child: Text(
               title ?? "",
-              style: Styles.appTitle,
+              style: Styles.appTitle(context: context),
             ),
           ),
           // Smart logo

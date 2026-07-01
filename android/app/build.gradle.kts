@@ -181,19 +181,41 @@ android {
 //            versionCode = 2
 //            versionName = "1.0.0-PJPL"
 //        }
-//        create("prodUrjagati") {
-//            dimension = "version"
-//            applicationIdSuffix = ".urjagati.steel.approver"
-//            resValue("string", "app_name", "Urjagati Approver")
-//            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-//            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
-////            val keystorePropertiesFile = rootProject.file("pjpl.properties")
-////            if (keystorePropertiesFile.exists()) {
-////                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-////            }
-//            versionCode = 1
-//            versionName = "1.0.0-Urjagati"
-//        }
+        create("prodUrjagati") {
+            dimension = "version"
+            applicationIdSuffix = ".urjagati.steel.approver"
+            resValue("string", "app_name", "Urjagati Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/urjagati_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/urjagati_logo")
+//            val keystorePropertiesFile = rootProject.file("pjpl.properties")
+//            if (keystorePropertiesFile.exists()) {
+//                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+//            }
+            versionCode = 1
+            versionName = "1.0.0-Urjagati"
+        }
+        create("prodBJPL") {
+            dimension = "version"
+            applicationIdSuffix = ".bjpl.steel.approver"
+            resValue("string", "app_name", "BJPL Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+            val keystorePropertiesFile = rootProject.file("bjpl.properties")
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+            }
+            versionCode = 1
+            versionName = "1.0.0-BJPL"
+        }
+        create("prodHPCL") {
+            dimension = "version"
+            applicationIdSuffix = ".hpcl.steel.approver"
+            resValue("string", "app_name", "HPCl Approver")
+            manifestPlaceholders.put("appIcon", "@mipmap/hpcl_logo")
+            manifestPlaceholders.put("appIconRound", "@mipmap/hpcl_logo")
+            versionCode = 1
+            versionName = "1.0.0-HPCl"
+        }
 
 
     }
