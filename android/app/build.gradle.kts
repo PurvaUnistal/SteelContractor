@@ -198,24 +198,24 @@ android {
             dimension = "version"
             applicationIdSuffix = ".bjpl.steel.approver"
             resValue("string", "app_name", "BJPL Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/unistal_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/unistal_logo")
+            manifestPlaceholders.put("appIcon", "@mipmap/vrpl_plcms")
+            manifestPlaceholders.put("appIconRound", "@mipmap/vrpl_plcms")
             val keystorePropertiesFile = rootProject.file("bjpl.properties")
             if (keystorePropertiesFile.exists()) {
                 keystoreProperties.load(FileInputStream(keystorePropertiesFile))
             }
-            versionCode = 1
+            versionCode = 2
             versionName = "1.0.0-BJPL"
         }
-        create("prodHPCL") {
-            dimension = "version"
-            applicationIdSuffix = ".hpcl.steel.approver"
-            resValue("string", "app_name", "HPCl Approver")
-            manifestPlaceholders.put("appIcon", "@mipmap/hpcl_logo")
-            manifestPlaceholders.put("appIconRound", "@mipmap/hpcl_logo")
-            versionCode = 1
-            versionName = "1.0.0-HPCl"
-        }
+//        create("prodHPCL") {
+//            dimension = "version"
+//            applicationIdSuffix = ".hpcl.steel.approver"
+//            resValue("string", "app_name", "HPCl Approver")
+//            manifestPlaceholders.put("appIcon", "@mipmap/hpcl_logo")
+//            manifestPlaceholders.put("appIconRound", "@mipmap/hpcl_logo")
+//            versionCode = 1
+//            versionName = "1.0.0-HPCl"
+//        }
 
 
     }

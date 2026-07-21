@@ -215,8 +215,9 @@ class ApproverActivityBloc
                       : roleType == "pmc"
                       ? "Client is required"
                       : roleType == "steel contractor"
-                      ? "PMC is required"
-                      : "TPI is required";
+                     // ? "PMC is required"
+                      ? "TPI is required"
+                      : "PMC is required";
                   Utils.errorSnackBar(msg: msg, context: context,);
                   return;
                 }
